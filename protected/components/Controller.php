@@ -21,5 +21,31 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
         
-        public $pageHeader;
+    /**
+     * Постраничный навигатор в админке
+     * 
+     * @var integer количество позиций на страницу для вывода в постраничном навигаторе
+     */
+    public $altAdminPageSize = 10;
+    
+    /**
+     * Постраничный навигатор для ингредиентов в админке
+     * 
+     * @var integer количество ингредиентов на страницу для вывода в постраничном навигаторе
+     */    
+    public $altAdminIngredientsPageSize = 35;
+    
+    /**
+     * H1
+     * 
+     * @var string H1 для страницы
+     */
+    public $pageHeader = '';
+    
+    /**
+     * Заголовок хлебных крошек
+     * 
+     * @var string
+     */
+    public $breadcrumbsTitle = '';        
 }

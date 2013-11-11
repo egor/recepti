@@ -2,11 +2,28 @@
 /* @var $this IngredientsController */
 Yii::app()->getClientScript()->registerScriptFile('/js/altadmin/ingredients/ingredients.js');
 $this->breadcrumbs=array(
-	'Новости',
+	$this->breadcrumbsTitle,
 );
 ?>
-<h1>Новости<a href="/altadmin/ingredients/add" rel="tooltip" title="добавить ингридиент" class="btn btn-primary" style="float: right;"><i class="icon-plus"></i> добавить ингридиент</a></h1>
-
+<h1><?php echo $this->pageHeader; ?><a href="/altadmin/ingredients/add" rel="tooltip" title="добавить ингредиент" class="btn btn-primary" style="float: right;"><i class="icon-plus"></i> добавить ингредиент</a></h1>
+<div class="pagination pagination-centered">
+<?php
+if ($paginator) {
+    $this->widget('CLinkPager', array(
+        'pages' => $paginator,
+        'id' => '',
+        'header' => '',
+        'selectedPageCssClass' => 'active',
+        'hiddenPageCssClass' => 'disabled',
+        'nextPageLabel' => '<span>&raquo;</span>',
+        'prevPageLabel' => '<span>&laquo;</span>',
+        'lastPageLabel' => '<span>&raquo;&raquo;</span>',
+        'firstPageLabel' => '<span>&laquo;&laquo;</span>',
+        'htmlOptions' => array('class' => 'paginator'),
+    ));
+}
+?>
+</div>
 <table class="table table-hover">
     <tr>
         <td><a rel="tooltip" title="название" rel=""><i class="icon-text-width"></i></a></td>        
@@ -24,3 +41,21 @@ foreach ($model as $value) {
 }
 ?>
 </table>
+<div class="pagination pagination-centered">
+<?php
+if ($paginator) {
+    $this->widget('CLinkPager', array(
+        'pages' => $paginator,
+        'id' => '',
+        'header' => '',
+        'selectedPageCssClass' => 'active',
+        'hiddenPageCssClass' => 'disabled',
+        'nextPageLabel' => '<span>&raquo;</span>',
+        'prevPageLabel' => '<span>&laquo;</span>',
+        'lastPageLabel' => '<span>&raquo;&raquo;</span>',
+        'firstPageLabel' => '<span>&laquo;&laquo;</span>',
+        'htmlOptions' => array('class' => 'paginator'),
+    ));
+}
+?>
+</div>
