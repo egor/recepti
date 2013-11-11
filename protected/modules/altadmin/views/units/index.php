@@ -1,5 +1,5 @@
 <?php
-/* @var $this IngredientsController */
+/* @var $this UnitsController */
 Yii::app()->getClientScript()->registerScriptFile('/js/altadmin/units/units.js');
 $this->breadcrumbs=array(
 	$this->breadcrumbsTitle,

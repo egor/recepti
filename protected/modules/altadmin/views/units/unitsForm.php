@@ -1,7 +1,7 @@
 <?php
-/* @var $this UserController */
+/* @var $this UnitsController */
 $this->breadcrumbs = array(
-    'Еденицы измерения'=>'/altadmin/units',
+    'Еденицы измерения' => '/altadmin/units',
     $this->breadcrumbsTitle,
 );
 $this->widget('GetFlashesWidget');
@@ -19,7 +19,7 @@ echo $form->textFieldRow($model, 'name', array('class' => 'span12'));
 <div class="form-actions" style="text-align: right;">
     <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'primary', 'label' => 'Сохранить')); ?>&nbsp;
     <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'info', 'label' => 'Сохранить и выйти')); ?>&nbsp;
-<?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Отмена')); ?>
+    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Отмена')); ?>
 </div>
 <?php
 $this->endWidget();

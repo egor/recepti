@@ -32,7 +32,7 @@ if ($paginator) {
 <?php
 foreach ($model as $value) {
     echo '<tr id="tr-'.$value->ingredients_id.'">
-        <td>'.$value->name.'</td>        
+        <td><a href="/altadmin/ingredients/edit/'.$value->ingredients_id.'" title="редактировать" rel="tooltip">'.$value->name.'</a></td>        
         <td><nobr>
         <a href="/altadmin/ingredients/edit/'.$value->ingredients_id.'" title="редактировать" rel="tooltip"><i class="icon-pencil"></i></a>&nbsp;
         <a href="#" onclick="ingredientsDelete('.$value->ingredients_id.'); return false;" title="удалить" rel="tooltip"><i class="icon-remove"></i></a>

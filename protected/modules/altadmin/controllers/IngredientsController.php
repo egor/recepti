@@ -33,7 +33,6 @@ class IngredientsController extends Controller
         $paginator = new CPagination($count);
         $paginator->pageSize = $this->altAdminIngredientsPageSize;        
         $paginator->applyLimit($criteria);
-
         $model = Ingredients::model()->findAll($criteria);
         $this->render('index', array('model' => $model, 'paginator' => $paginator));
     }
@@ -41,11 +40,11 @@ class IngredientsController extends Controller
     /**
      * Добавление ингредиента
      * 
-     * @return render add
+     * @return render ingredientsForm
      */
     public function actionAdd()
     {
-        $this->pageTitle = 'Добавление ингредиента';
+        $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Добавление ингредиента';
         $model = new Ingredients;
         if (isset($_POST['Ingredients']) && !isset($_POST['yt2'])) {
             $model->attributes = $_POST['Ingredients'];
@@ -61,19 +60,19 @@ class IngredientsController extends Controller
                 Yii::app()->user->setFlash('error', '<strong>Ошибка!</strong> Проверте поля еще раз.');
             }
         }
-        $this->render('add', array('model' => $model));
+        $this->render('ingredientsForm', array('model' => $model));
     }
 
     /**
      * Редактирование ингредиента
      * 
      * @param integer $id - id ингредиента
-     * @return render edit
+     * @return render ingredientsForm
      */
     public function actionEdit($id)
     {
         $model = Ingredients::model()->findByPk($id);
-        $this->pageTitle = 'Редактирование ингредиента (' . $model->name . ')';
+        $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Редактирование ингредиента (' . $model->name . ')';
         if (isset($_POST['Ingredients']) && !isset($_POST['yt2'])) {
             $model->attributes = $_POST['Ingredients'];
             if ($model->validate()) {
@@ -86,7 +85,7 @@ class IngredientsController extends Controller
                 Yii::app()->user->setFlash('error', '<strong>Ошибка!</strong> Проверте поля еще раз.');
             }
         }
-        $this->render('edit', array('model' => $model));
+        $this->render('ingredientsForm', array('model' => $model));
     }
 
     /**
