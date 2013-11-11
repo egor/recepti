@@ -1,0 +1,15 @@
+/* 
+    Document   : site
+    Created on : 27.03.2013, 14:54:51
+    Author     : egorik
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.rating-m{
+    cursor: pointer;
+}
+.norm-height{
+    height: 60px;
+    overflow: hidden;
+}

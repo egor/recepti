@@ -1,0 +1,29 @@
+/* 
+    Document   : style
+    Created on : 22.02.2013, 14:28:17
+    Author     : egorik
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.u-delete{
+    text-align: center!important;
+    background-color: #3A87AD;
+    color: #fff;
+}
+.i-img{
+    width: 100%;
+}
+.pre-img{
+    width:220px;
+    text-align:right;
+
+}
+.main-img{
+    text-align: center;
+    width: 100%;
+}
+.i-remove{
+    display: inline-table;
+    margin-top: 5px;
+}
+
