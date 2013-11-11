@@ -1,6 +1,6 @@
 <?php
 /**
- * IngredientsController. 
+ * IngredientsController. Контроллер управления ингредиентами. 
  * 
  * Контроллер содержит функции:<br>
  * <ul>

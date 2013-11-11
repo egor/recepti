@@ -1,10 +1,10 @@
 <?php
-foreach (Yii::app()->user->getFlashes() as $key => $message) {
-    echo '<div class="alert alert-' . $key . '">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-  ' . $message . '
-</div>';
-}
+/* @var $this UserController */
+$this->breadcrumbs = array(
+    'Еденицы измерения'=>'/altadmin/units',
+    $this->breadcrumbsTitle,
+);
+$this->widget('GetFlashesWidget');
 ?>
 <small>Поля отмеченные <span class="required">*</span> обязательны  для заполнения</small>
 <?php
@@ -23,4 +23,3 @@ echo $form->textFieldRow($model, 'name', array('class' => 'span12'));
 </div>
 <?php
 $this->endWidget();
-?>

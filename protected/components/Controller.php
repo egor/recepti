@@ -36,6 +36,13 @@ class Controller extends CController
     public $altAdminIngredientsPageSize = 35;
     
     /**
+     * Постраничный навигатор для ингредиентов в админке
+     * 
+     * @var integer количество ингредиентов на страницу для вывода в постраничном навигаторе
+     */    
+    public $altAdminUnitsPageSize = 15;
+    
+    /**
      * H1
      * 
      * @var string H1 для страницы
