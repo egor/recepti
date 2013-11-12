@@ -76,12 +76,12 @@ class Composition extends CActiveRecord
 		return array(
 			'composition_id' => 'Composition',
 			'dishes_id' => 'Dishes',
-			'ingredients_id' => 'Ingredients',
-			'units_id' => 'Units',
-			'info' => 'Info',
-			'position' => 'Position',
-			'required' => 'Required',
-			'count' => 'Count',
+			'ingredients_id' => 'Название ингредиента',
+			'units_id' => 'Еденицы измерения',
+			'info' => 'Дополнительная информация',
+			'position' => 'Позиция',
+			'required' => 'Обязательный',
+			'count' => 'Количество',
 		);
 	}
 

@@ -1,16 +1,21 @@
-function dishesDelete(id) {
-    if (!confirm("Уверены, что хотите удалить рецепт?")) {
+/**
+ * Удаление картинки рецепта
+ * 
+ * @param {integer} id - id рецепта
+ * @returns {Boolean}
+ */
+function dishesDeleteMainPic(id, type) {
+    if (!confirm("Уверены, что хотите удалить картинку?")) {
         return true;
     }
     $.ajax({
         type: "GET",
-        url: "/altadmin/dishes/delete",
+        url: "/altadmin/dishes/deleteMainPic",
         data: "id=" + id,                
         success: function(data){
             var obj = $.parseJSON(data);
             if (obj.error == 0) {
-                $("#tr-"+id).html('<td colspan="6" class="u-delete">рецепт удален</td>');
-                $("#tr-"+id).hide(3500);
+                $("#main-img").html('<div class="main-img">картинка удалена</div>');
             } else {
                 if (obj.message != '') {
                     alert (obj.message);

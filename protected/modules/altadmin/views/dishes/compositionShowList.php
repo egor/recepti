@@ -12,8 +12,7 @@ foreach ($model as $value) {
         <td>'.$value->ingredients->name.'</td>
         <td>'.$value->units->name.'</td>            
         <td>'.$value->count.'</td>
-        <td>'.($value->required == 1 ? '<a rel="tooltip" title="да"><i class="icon-ok-sign"></i></a>' : '<a rel="tooltip" title="нет"><i class="icon-minus-sign"></i></a>').'</td>
-        
+        <td>'.($value->required == 1 ? '<a rel="tooltip" title="да"><i class="icon-ok-sign"></i></a>' : '<a rel="tooltip" title="нет"><i class="icon-minus-sign"></i></a>').'</td>        
         <td><nobr>
         <a href="#" onclick="compositionEdit('.$value->composition_id.'); return false;" title="редактировать" rel="tooltip"><i class="icon-pencil"></i></a>&nbsp;
         <a href="#" onclick="compositionDelete('.$value->composition_id.'); return false;" title="удалить" rel="tooltip"><i class="icon-remove"></i></a>

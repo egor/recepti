@@ -37,11 +37,16 @@ class SiteController extends Controller
      * This is the action to handle external exceptions.
      */
     public function actionError()
-    {
+    {        
+        //var_dump(Yii::app()->errorHandler->error); die;
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
-            else
+            else if ($error['code'] == 404) {
+               $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Страница не найдена (404-я ошибка)';
+               $this->render($error['code'], $error);
+            }
+            else 
                 $this->render('error', $error);
         }
     }
