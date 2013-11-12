@@ -3,10 +3,28 @@
 Yii::app()->getClientScript()->registerScriptFile('/js/altadmin/dishes/dishes.js');
 $this->breadcrumbs=array(
 	'Рецепты',
+    $this->breadcrumbsTitle
 );
 ?>
-<h1>Рецепты<a href="/altadmin/dishes/add" rel="tooltip" title="добавить рецепт" class="btn btn-primary" style="float: right;"><i class="icon-plus"></i> добавить рецепт</a></h1>
-
+<h1><?php echo $this->pageHeader; ?><a href="/altadmin/dishes/add" rel="tooltip" title="добавить рецепт" class="btn btn-primary" style="float: right;"><i class="icon-plus"></i> добавить рецепт</a></h1>
+<div class="pagination pagination-centered">
+<?php
+if ($paginator) {
+    $this->widget('CLinkPager', array(
+        'pages' => $paginator,
+        'id' => '',
+        'header' => '',
+        'selectedPageCssClass' => 'active',
+        'hiddenPageCssClass' => 'disabled',
+        'nextPageLabel' => '<span>&raquo;</span>',
+        'prevPageLabel' => '<span>&laquo;</span>',
+        'lastPageLabel' => '<span>&raquo;&raquo;</span>',
+        'firstPageLabel' => '<span>&laquo;&laquo;</span>',
+        'htmlOptions' => array('class' => 'paginator'),
+    ));
+}
+?>
+</div>
 <table class="table table-hover">
     <tr>
         <td><a rel="tooltip" title="краткий заголовок" rel=""><i class="icon-text-width"></i></a></td>
@@ -19,7 +37,7 @@ $this->breadcrumbs=array(
 <?php
 foreach ($model as $value) {
     echo '<tr id="tr-'.$value->dishes_id.'">
-        <td>'.$value->menu_name.'</td>
+        <td><a href="/altadmin/dishes/edit/'.$value->dishes_id.'" title="редактировать" rel="tooltip">'.$value->menu_name.'</a></td>
         <td>'.$value->category->menu_name.'</td>
 
         <td>'.(!empty($value->img) ? '<a rel="tooltip" title="да"><i class="icon-ok-sign"></i></a>' : '<a rel="tooltip" title="нет"><i class="icon-minus-sign"></i></a>').'</td>
@@ -33,3 +51,21 @@ foreach ($model as $value) {
 }
 ?>
 </table>
+<div class="pagination pagination-centered">
+<?php
+if ($paginator) {
+    $this->widget('CLinkPager', array(
+        'pages' => $paginator,
+        'id' => '',
+        'header' => '',
+        'selectedPageCssClass' => 'active',
+        'hiddenPageCssClass' => 'disabled',
+        'nextPageLabel' => '<span>&raquo;</span>',
+        'prevPageLabel' => '<span>&laquo;</span>',
+        'lastPageLabel' => '<span>&raquo;&raquo;</span>',
+        'firstPageLabel' => '<span>&laquo;&laquo;</span>',
+        'htmlOptions' => array('class' => 'paginator'),
+    ));
+}
+?>
+</div>

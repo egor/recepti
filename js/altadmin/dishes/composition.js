@@ -1,10 +1,20 @@
-
+/**
+ * Сохранение ингредиента при добавлении или редактировании
+ * 
+ * @param {type} id - id рецепта к которому относится ингредиент
+ * @param integer edit - 0 - добавление, 1 - редактирование
+ * @param integer iId - id ингредиента при редактировании (при добавлении = 0)
+ * @returns {Boolean}
+ */
 function compositionAddSave(id, edit, iId) {    
-
     ingredients_id = $('#Composition_ingredients_id').val();
     units_id = $('#Composition_units_id').val();
     info = $('#Composition_info').val();
-    required = $('#Composition_required').val();
+    if ($('#Composition_required').is(':checked')) {
+        required = 1;
+    } else {
+        required = 0;
+    }    
     count = $('#Composition_count').val();
     if (edit == 1) {
         gUrl = "/altadmin/dishes/compositionEdit";
@@ -33,6 +43,13 @@ function compositionAddSave(id, edit, iId) {
     });
     return false;
 }
+
+/**
+ * Вывод формы добавления ингредиента
+ * 
+ * @param {type} id
+ * @returns {Boolean}
+ */
 function compositionAdd(id) {    
     $(".ingridients_form").html('');
     $(".ingridients_form").show(); 
@@ -46,6 +63,13 @@ function compositionAdd(id) {
     });
     return false;
 }
+
+/**
+ * Проверка на json массив
+ * 
+ * @param {type} data
+ * @returns {Boolean}
+ */
 function isJSON(data) {
     var isJson = false
     try {
@@ -57,10 +81,16 @@ function isJSON(data) {
     }
     return isJson;
 }
-    
+
+/**
+ * Вывод списка ингредиентов рецепта
+ * 
+ * @param integer id - id рецепта
+ * @returns {undefined}
+ */
 function compositionShowList(id){
     $.ajax({
-        type: "POST",                    
+        type: "GET",                    
         url: "/altadmin/dishes/compositionShowList",
         data: "id=" + id,    
         success: function(data){            
@@ -70,14 +100,15 @@ function compositionShowList(id){
 }
 
 /**
- * Удаление компонента из состава
+ * Удаление ингредиента из рецепта
+ * 
  */
 function compositionDelete(id) {
-     if (!confirm("Уверены, что хотите удалить компонент?")) {
+     if (!confirm("Уверены, что хотите удалить ингредиент?")) {
         return true;
     }
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/altadmin/dishes/compositionDelete",
         data: "id=" + id,                
         success: function(data){
@@ -98,7 +129,8 @@ function compositionDelete(id) {
 }
 
 /**
- * Редактирование компонента из состава
+ * Редактирование ингредиента в рецепте
+ * 
  */
 function compositionEdit(iId) {
     $(".ingridients_form").html('');
@@ -111,5 +143,15 @@ function compositionEdit(iId) {
             $(".ingridients_form").html(data);            
         }
     });
+    return false;
+}
+
+/**
+ * Отмена добавление или редактирования ингредиента
+ * 
+ * @returns {Boolean}
+ */
+function compositionCancelSave() {
+    $(".ingridients_form").hide();
     return false;
 }
