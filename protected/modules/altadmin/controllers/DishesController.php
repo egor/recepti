@@ -20,10 +20,7 @@ class DishesController extends Controller {
      * @return render index
      */
     public function actionIndex($category = 0) {
-        $condition = '';
-        if ($category != 0) {
-            $condition = '`category_id` ="' . $category . '"';
-        }
+        $condition = $this->_categoryFilter($category);
         $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Рецепты';
         $criteria = new CDbCriteria();
         $criteria->order = 't.category_id, t.menu_name';
@@ -32,8 +29,9 @@ class DishesController extends Controller {
         $paginator = new CPagination($count);
         $paginator->pageSize = $this->altAdminDishesPageSize;
         $paginator->applyLimit($criteria);
-        $model = Dishes::model()->with('category')->findAll($criteria);
-        $this->render('index', array('model' => $model, 'paginator' => $paginator));
+        $model = Dishes::model()->with('category', 'dishes_rating', 'dishes_visits')->findAll($criteria);
+        $modelCategory = Category::model()->findAll();
+        $this->render('index', array('model' => $model, 'modelCategory'=>$modelCategory, 'paginator' => $paginator));
     }
 
     /**
@@ -193,6 +191,21 @@ class DishesController extends Controller {
         return true;
     }
 
+    private function _categoryFilter($category) {
+        $condition = '';      
+        if ($category == -1) {            
+            unset(Yii::app()->session['dishesCategory']);
+        } else if ($category != 0) {
+            Yii::app()->session['dishesCategory'] = $category;
+        } else {
+            $category = Yii::app()->session['dishesCategory'];
+        }
+        if ($category != 0 && $category != -1) {
+            $condition = 't.category_id ="' . $category . '"';
+        }
+        return $condition;
+    }
+    
     //Ингредиенты
     
     /**
