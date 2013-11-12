@@ -9,9 +9,9 @@ class NewsController extends Controller
         $this->render('index', array('newsList' => $newsList));
     }
     
-    public function actionDetail()
+    public function actionDetail($id)
     {
-        $model = News::model()->find('url = "klaviatura-vyipolnyaet-funktsiyu-keysa"');
+        $model = News::model()->findByPk($id);
         $this->render('detail', array('model' => $model));
     }
 }

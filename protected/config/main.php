@@ -46,7 +46,9 @@ return array(
         ),
 
         // uncomment the following to enable URLs in path-format
-
+        'errorHandler'=>array(
+            'errorAction'=>'site/error',
+        ),
         'urlManager' => array(
             'urlFormat' => 'path',
             'showScriptName' => false,
