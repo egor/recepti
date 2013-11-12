@@ -54,7 +54,7 @@ function compositionAdd(id) {
     $(".ingridients_form").html('');
     $(".ingridients_form").show(); 
     $.ajax({
-        type: "POST",                    
+        type: "GET",                    
         url: "/altadmin/dishes/compositionAdd",
         data: "id=" + id,    
         success: function(data){            

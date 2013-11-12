@@ -211,8 +211,7 @@ class DishesController extends Controller {
     /**
      * Добавление ингредиента в рецепт
      */
-    public function actionCompositionAdd() {
-        $id = $_POST['id'];
+    public function actionCompositionAdd($id) {
         $model = new Composition;
         if (isset($_POST['ingredients_id']) && isset($_POST['units_id'])) {
             $model->dishes_id = $id;
@@ -260,7 +259,6 @@ class DishesController extends Controller {
      * @return renderPartial compositionShowList - список ингредиентов
      */
     public function actionCompositionShowList($id) {
-        $id = (int) $_POST['id'];
         $model = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
         $this->renderPartial('compositionShowList', array('model' => $model));
     }
