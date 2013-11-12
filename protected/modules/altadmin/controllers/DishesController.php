@@ -211,7 +211,8 @@ class DishesController extends Controller {
     /**
      * Добавление ингредиента в рецепт
      */
-    public function actionCompositionAdd($id) {
+    public function actionCompositionAdd() {
+        $id = (int)$_POST['id'];
         $model = new Composition;
         if (isset($_POST['ingredients_id']) && isset($_POST['units_id'])) {
             $model->dishes_id = $id;
