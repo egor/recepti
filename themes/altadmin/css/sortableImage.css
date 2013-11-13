@@ -1,0 +1,46 @@
+/* 
+    Document   : sortableImage
+    Created on : 31.10.2013, 12:30:34
+    Author     : Администратор
+    Description: Стили для списка сортировки картинок.
+    Widget     : ImagesListWidget
+*/
+
+/*imagess sortable*/
+
+.ui-sortable {
+    padding: 0;
+    margin: 0;
+}
+.images-list-block ul {
+	margin: 1em;
+	list-style: none;
+	padding: 0;
+	padding: 0.5em;
+}
+
+.images-list ul li {
+	border: solid 1px #aaaaaa;
+	padding: 0.5em;
+	margin: 0.5em;
+	background-color: #eeeeee;
+	text-align: right;
+	clear: both;  
+        height: 140px;
+        list-style: none;
+    
+}
+
+.images-list ul li span.note {
+	float: left;
+}
+
+.images-list ul li a  img{
+	border: none;
+}
+.pimages{
+    float: left;
+    height: 140px;
+    /*width: 306px;*/
+    cursor: move;
+}

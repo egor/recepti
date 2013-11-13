@@ -276,4 +276,20 @@ class DishesController extends Controller {
         Composition::model()->deleteByPk($id);
         echo json_encode(array('error' => 0));        
     }
+        public function actionChangeOrder()
+    {
+        echo ImagesBasicOperations::changeOrder('DishesGallery', $_POST['neworder']);
+    }
+    
+    public function actionDeleteImage()
+    {
+        $imageFolder = array('/images/dishes/small', '/images/dishes/big', '/images/dishes/real');
+        echo ImagesBasicOperations::deleteImage('DishesGallery', $_POST['id'], $imageFolder);
+    }
+    
+    public function actionEditMetaImage()
+    {
+        echo ImagesBasicOperations::editMetaImage('DishesGallery', $_POST);
+    }
+
 }

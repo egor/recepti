@@ -104,3 +104,22 @@ $(document).ready(function() {
 });
 </script>
 <?php }
+
+if ($edit == 1) { ?>
+<script>
+    pathToActionChangeOrder = '/altadmin/dishes/changeOrder';
+    pathToActionDeleteImage = '/altadmin/dishes/deleteImage';
+    pathToActionEditMetaImage = '/altadmin/dishes/editMetaImage';
+</script>
+<br />
+<div class="images-list well form-vertical" id="images-list">
+<?php $this->widget('ImagesListWidget', array('pid'=>$model->dishes_id,'folder'=>'dishes','model'=>'DishesGallery', 'modelId' => 'dishes_gallery_id')); ?>
+</div>
+<div class="images-list well form-vertical">
+<?php $this->widget('UploadifyWidget', array('model' => 'DishesGallery', 'pid' => $model->dishes_id, 'folder' => 'dishes', 'modelId' => 'dishes_gallery_id')); ?>
+</div>
+<?php } else { ?>
+<div class="images-list well form-vertical">
+    <h4>Для загрузки картинок сохраните страницу</h4>
+</div>
+<?php } ?>
