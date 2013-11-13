@@ -82,6 +82,7 @@ class DishesController extends Controller {
      */
     public function actionEdit($id) {
         $model = Dishes::model()->findByPk($id);
+        $modelCategory = Category::model()->findByPk($model->category_id);
         $oldImg = $model->img;
         $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Редактирование рецепта (' . $model->menu_name . ')';
         if (isset($_POST['Dishes']) && !isset($_POST['yt2'])) {
@@ -99,7 +100,7 @@ class DishesController extends Controller {
             }
         }
         $model->date = date('d.m.Y', $model->date);
-        $this->render('dishesForm', array('model' => $model, 'edit' => 1));
+        $this->render('dishesForm', array('model' => $model, 'modelCategory' => $modelCategory, 'edit' => 1));
     }
 
     /**

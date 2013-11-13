@@ -1,3 +1,4 @@
+<h3>Ингредиенты рецепта</h3>
 <table class="table table-hover">
     <tr>
         <td><a rel="tooltip" title="название" rel=""><i class="icon-text-width"></i></a></td>

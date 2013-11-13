@@ -93,7 +93,10 @@ Yii::app()->getClientScript()->registerScriptFile('/js/altadmin/bootstrap-datepi
 </script>
 <?php if (isset($edit)) { ?>
 <div class="ingridients_list"></div>
-<div class="ingridients_add"><a href="#" onclick="compositionAdd(<?php echo $model->dishes_id; ?>); return false;" id="ingridients_add" rel="tooltip" title="Добавить ингридиент">Добавить ингридиент</a></div>
+<div class="ingridients_add">
+    <a class="btn btn-primary" href="#" onclick="compositionAdd(<?php echo $model->dishes_id; ?>); return false;" id="ingridients_add" rel="tooltip" title="Добавить ингридиент">Добавить ингридиент</a>    
+    <a style="float:right;" class="btn btn-info" href="/recipes/<?php echo $modelCategory->url; ?>/<?php echo $model->url; ?>" target="_blank">Посмотреть на сайте <small>(/recipes/<?php echo $modelCategory->url; ?>/<?php echo $model->url; ?>)</small></a>
+</div>
 <div class="ingridients_form"></div>
 <script>
 $(document).ready(function() {
