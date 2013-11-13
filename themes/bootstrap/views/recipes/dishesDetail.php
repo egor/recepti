@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 <h1><?php echo $this->pageHeader; ?></h1>
 <br/>
 
-<h4>Ингредиенты для "<?php echo $model->menu_name; ?>"</h4>
+<h2 class="dishes">Ингредиенты для "<?php echo $model->menu_name; ?>"</h2>
 <table class="table table-hover">
     <tr>
         <th>Название</th>
@@ -31,7 +31,7 @@ $this->breadcrumbs = array(
     }
     ?>
 </table>
-<h4>Рецепт "<?php echo $model->menu_name; ?>"</h4>
+<h2 class="dishes">Рецепт "<?php echo $model->menu_name; ?>"</h2>
 <?php
 echo $model->text;
 ?>
