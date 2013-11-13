@@ -9,9 +9,9 @@ class UploadifyController extends Controller {
     public function actionUploadImg() {
         
         $arrSizeImg['small']['width'] = 100;
-        $arrSizeImg['small']['height'] = 100;
-        $arrSizeImg['big']['width'] = 100;
-        $arrSizeImg['big']['height'] = 100;
+        $arrSizeImg['small']['height'] = 75;
+        $arrSizeImg['big']['width'] = 400;
+        $arrSizeImg['big']['height'] = 300;
         $modelImg = new $_POST['model'];
         $modelImg->pid = $_POST['pid'];
         $modelImg->name = 'tmp';
@@ -29,7 +29,9 @@ class UploadifyController extends Controller {
             Yii::app()->setComponents(array('imagemod' => array('class' => 'application.extensions.imagemodifier.CImageModifier')));
             Yii::app()->imagemod->setLanguage('ru_RU');
             $handle = Yii::app()->imagemod->load($_FILES['Filedata']);
-            if ($handle->uploaded) {                
+            if ($handle->uploaded) {
+                $handle->image_watermark = Yii::getPathOfAlias('webroot').'/images/watermark/watermark.png';
+                $handle->image_watermark_position = 'BR';
                 //не заменять - на _
                 $handle->file_safe_name = false;
                 //не переименовывать
@@ -44,11 +46,15 @@ class UploadifyController extends Controller {
                 } else {                
                     Yii::app()->user->setFlash('error', '<strong>Ошибка!</strong> ' . $handle->error);
                 }
+                $handle->image_watermark = Yii::getPathOfAlias('webroot').'/images/watermark/watermark.png';
+                $handle->image_watermark_position = 'BR';
+
                 $handle->file_safe_name = false;
                 $handle->file_auto_rename = false;
                 $handle->jpeg_quality = 100;
                 $handle->image_resize = true;
                 $handle->image_ratio = true;
+                $handle->image_ratio_crop = true;
                 $handle->file_new_name_body = $modelImg->dishes_gallery_id;
                 $handle->image_x = $arrSizeImg['big']['width'];
                 $handle->image_y = $arrSizeImg['big']['height'];
@@ -59,6 +65,9 @@ class UploadifyController extends Controller {
                 } else {
                     Yii::app()->user->setFlash('error', '<strong>Ошибка!</strong> ' . $handle->error);
                 }
+                $handle->image_watermark = Yii::getPathOfAlias('webroot').'/images/watermark/watermark.png';
+                $handle->image_watermark_position = 'BR';
+
                 $handle->file_safe_name = false;
                 $handle->file_auto_rename = false;
                 $handle->jpeg_quality = 100;

@@ -8,7 +8,17 @@ $this->breadcrumbs = array(
 );
 ?>
 <h1><?php echo $this->pageHeader; ?></h1>
-<br/>
+<div class="span12" style="margin-left: 0px;">
+<div  class="span6" style="margin-left: 0px;">
+<?php
+echo DishesGallery::mainGalleryImage($model->dishes_id);
+$gallery = DishesGallery::listGalleryImages($model->dishes_id);
+?>
+</div>
+    <div class="span6" style="margin-left: 0px;">
+        <?php echo $model->short_text; ?>
+    </div>
+</div>
 
 <h2 class="dishes">Ингредиенты для "<?php echo $model->menu_name; ?>"</h2>
 <table class="table table-hover">
@@ -40,7 +50,9 @@ echo $model->text;
 <a rel="tooltip" title="сложность"><i class="icon-leaf"></i></a> <small><?php echo $model->complexity->name; ?></small>&nbsp;
 <a rel="tooltip" title="просмотров"><i class="icon-eye-open"></i></a> <small><?php echo $visits; ?></small>&nbsp;
 <a rel="tooltip" title="автор"><i class="icon-user"></i></a> <small>Администратор</small>&nbsp;
-<a onclick="rating(<?php echo $model->dishes_id; ?>, 'up' ); return false;" class="rating-m" rel="tooltip" title="рейтинг. понравился рецепт (+1)"><i class="icon-arrow-up"></i></a> <small id="rating-count"><?php echo ($model->dishes_rating->plus - $model->dishes_rating->minus); ?></small> <a onclick="rating(<?php echo $model->dishes_id; ?>, 'down'); return false;" class="rating-m" rel="tooltip" title="рейтинг. не понравился рецепт (-1)" ><i class="icon-arrow-down"></i></a>&nbsp; 
+<a onclick="rating(<?php echo $model->dishes_id; ?>, 'up');
+        return false;" class="rating-m" rel="tooltip" title="рейтинг. понравился рецепт (+1)"><i class="icon-arrow-up"></i></a> <small id="rating-count"><?php echo ($model->dishes_rating->plus - $model->dishes_rating->minus); ?></small> <a onclick="rating(<?php echo $model->dishes_id; ?>, 'down');
+        return false;" class="rating-m" rel="tooltip" title="рейтинг. не понравился рецепт (-1)" ><i class="icon-arrow-down"></i></a>&nbsp; 
 <a rel="tooltip" title="время приготовления"><i class="icon-time"></i></a> <small><?php echo $model->cooking_time; ?> мин.</small>&nbsp;
 <a href="/recipes/print/<?php echo $model->dishes_id; ?>" target="_blank" rel="tooltip" alt="распечатать рецепт '<?php echo $model->menu_name; ?>'" title="распечатать рецепт '<?php echo $model->menu_name; ?>'"><i class="icon-print"></i></a>&nbsp;
 <br/>
@@ -49,22 +61,22 @@ echo $model->text;
 
 
 <script>
-    function rating(id, type) {        
+    function rating(id, type) {
         $.ajax({
             type: "POST",
             url: "/recipes/dishesRating",
-            data: "id=" + id + "&type=" + type,                
-            success: function(data){
+            data: "id=" + id + "&type=" + type,
+            success: function(data) {
                 var obj = $.parseJSON(data);
-                if (obj.error == 0) {                    
+                if (obj.error == 0) {
                     $('#rating-count').html(obj.rating);
                     $(".rating-m").removeClass('rating-m')
                     //class="rating-m"
                 } else {
                     if (obj.message != '') {
-                        alert (obj.message);
+                        alert(obj.message);
                     } else {
-                        alert ('упс..... ошибочка');
+                        alert('упс..... ошибочка');
                     }
                 }
             }

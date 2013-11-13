@@ -100,4 +100,20 @@ class DishesGallery extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+    
+    public function mainGalleryImage($pid)
+    {
+        $model = DishesGallery::model()->find(array('condition'=>'pid="'.$pid.'"', 'order'=>'position DESC'));
+        if ($model) {
+            return '<a href="/images/dishes/real/'.$model->name.'" data-lightbox="roadtrip" ><img class="img-polaroid" src="/images/dishes/big/'.$model->name.'" alt="'.$model->alt.'" title="'.$model->title.'" /></a>';
+        } else {
+            return '<img src="/images/nf.jpg" />';
+        }
+    }
+    
+    public function listGalleryImages($pid)
+    {
+        $model = DishesGallery::model()->findAll(array('condition'=>'pid="'.$pid.'"', 'order'=>'position DESC'));
+        return $model;
+    }
 }

@@ -6,6 +6,12 @@
         <meta name="language" content="ru" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/site.css" />        
+
+<!--<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/modernizr.custom.js"></script>-->
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/jquery-1.10.2.min.js"></script>
+        <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/lightbox-2.6.min.js"></script>
+        <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox/lightbox.css" media="screen"/>
+
         <title><?php echo CHtml::encode($this->pageTitle) . Yii::app()->params['extraTitle']; ?></title>
 
         <?php Yii::app()->bootstrap->register(); ?>

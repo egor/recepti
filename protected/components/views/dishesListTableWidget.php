@@ -24,7 +24,7 @@ foreach ($modelList as $value) {
                   <a href="'.$url.'">'.$img.'</a>
                   <div class="caption">
                     <div class="norm-height"><h4>'.$value->menu_name.'</h4></div>
-                        '.$value->short_text.'
+                        
                             <table style="width:100%">
                             <tr>
                             <td><a rel="tooltip" title="время приготовления"><i class="icon-time"></i></a> <small>'.$value->cooking_time.' мин.</small></td>

@@ -60,7 +60,7 @@ class Dishes extends CActiveRecord
                     //array('category_id, url, meta_title, meta_keywords, meta_description, menu_name, header, short_text, text, visibility, in_menu, date, user_id, cooking_time, complexity_id, servings, img, img_alt, img_title, tags, category_add', 'required'),
 			array('category_id, visibility, in_menu, date, user_id, cooking_time, complexity_id', 'numerical', 'integerOnly'=>true),
 			array('servings', 'numerical'),
-			array('url, meta_title, meta_keywords, menu_name, header, short_text, img, img_alt, img_title, category_add', 'length', 'max'=>255),
+			array('url, meta_title, meta_keywords, menu_name, header, img, img_alt, img_title, category_add', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('dishes_id, category_id, url, meta_title, meta_keywords, meta_description, menu_name, header, short_text, text, visibility, in_menu, date, user_id, cooking_time, complexity_id, servings, img, img_alt, img_title, tags, category_add', 'safe', 'on'=>'search'),
