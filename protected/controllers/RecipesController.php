@@ -1,13 +1,11 @@
 <?php
 
-class RecipesController extends Controller
-{
+class RecipesController extends Controller {
 
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $this->pageHeader = 'Рецепты';
         $modelCategory = Category::model()->findAll();
-        
+
         $condition = '`visibility`="1"';
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
@@ -19,7 +17,6 @@ class RecipesController extends Controller
         $this->pageTitle = 'Категории рецептов';
         $this->pageHeader = 'Категории рецептов';
         $this->render('index', array('modelCategory' => $modelCategory));
-
     }
 
     /**
@@ -27,8 +24,7 @@ class RecipesController extends Controller
      * 
      * @param type $id
      */
-    public function actionDishesDetail($id)
-    {
+    public function actionDishesDetail($id) {
         $model = Dishes::model()->with('complexity', 'dishes_rating')->findByPk($id);
         $modelCategory = Category::model()->findByPk($model->category_id);
         $modelComposition = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
@@ -45,8 +41,7 @@ class RecipesController extends Controller
      * 
      * @param type $id
      */
-    public function actionDishesList($id)
-    {
+    public function actionDishesList($id) {
         //если этого не сделать, то будет тулить id в урл
         unset($_GET['id']);
         //var_dump($_GET); die;
@@ -64,9 +59,8 @@ class RecipesController extends Controller
         $paginator->pageSize = $limit;
         $paginator->route = '/recipes/' . $modelCategory->url;
         $paginator->applyLimit($criteria);
-        
+
         //$paginator->pageVar = '';
-        
         //$paginator->
         //$model = News::model()->with('news_type')->findAll($criteria);
 
@@ -85,13 +79,12 @@ class RecipesController extends Controller
      * Добавление рейтинга рецепта AJAX
      * 
      */
-    public function actionDishesRating()
-    {
+    public function actionDishesRating() {
         if (Yii::app()->request->isAjaxRequest) {
             $id = (int) $_POST['id'];
             $type = $_POST['type'];
             if ($type != 'up' && $type != 'down') {
-                echo json_encode(array('error' => 1, 'message'=>'неверно указан тип'));
+                echo json_encode(array('error' => 1, 'message' => 'неверно указан тип'));
                 exit();
             }
             if ($id > 0) {
@@ -103,7 +96,7 @@ class RecipesController extends Controller
                             $modelRating->plus = $modelRating->plus + 1;
                         } else {
                             $modelRating->minus = $modelRating->minus + 1;
-                        }                        
+                        }
                     } else {
                         $modelRating = new DishesRating;
                         $modelRating->dishes_id = $id;
@@ -120,11 +113,11 @@ class RecipesController extends Controller
                     echo json_encode(array('error' => 0, 'rating' => $rating));
                     exit();
                 } else {
-                    echo json_encode(array('error' => 1, 'message'=>'нет такого рецепта'));
+                    echo json_encode(array('error' => 1, 'message' => 'нет такого рецепта'));
                     exit();
                 }
             } else {
-                echo json_encode(array('error' => 1, 'message'=>'ай, нет такого рецепта'));
+                echo json_encode(array('error' => 1, 'message' => 'ай, нет такого рецепта'));
                 exit();
             }
         } else {
@@ -138,8 +131,7 @@ class RecipesController extends Controller
      * @param int $id - id рецепта из таблицы dishes
      * @return boolean
      */
-    private function _dishesVisitsAdd($id)
-    {
+    private function _dishesVisitsAdd($id) {
         $model = DishesVisits::model()->find('`dishes_id`="' . $id . '"');
         if ($model) {
             $model->count = $model->count + 1;
@@ -161,8 +153,7 @@ class RecipesController extends Controller
      * @param int $id - id рецепта из таблицы dishes
      * @return int - количество просмотров
      */
-    public function getCountDishesVisits($id)
-    {
+    public function getCountDishesVisits($id) {
         $model = DishesVisits::model()->find('`dishes_id`="' . $id . '"');
         if ($model) {
             return $model->count;
@@ -171,4 +162,23 @@ class RecipesController extends Controller
         }
     }
 
+    /**
+     * Печать рецепта
+     * 
+     * @param integer $id - id рецепта
+     * @throws CHttpException
+     */
+    public function actionPrint($id) {
+        $model = Dishes::model()->with('complexity', 'dishes_rating')->findByPk($id);
+        $modelCategory = Category::model()->findByPk($model->category_id);
+        $modelComposition = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
+        $this->pageTitle = $model->meta_title;
+        $this->pageHeader = $model->header;
+        if ($model) {
+            $this->layout='/layouts/printVersion';
+            $this->render('print', array('model' => $model, 'modelCategory' => $modelCategory, 'modelComposition' => $modelComposition, 'visits' => $this->getCountDishesVisits($id)));
+        } else {
+            throw new CHttpException(404);
+        }
+    }
 }

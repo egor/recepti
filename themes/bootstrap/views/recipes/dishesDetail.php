@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 <h1><?php echo $this->pageHeader; ?></h1>
 <br/>
 
-<h4>Ингридиенты</h4>
+<h4>Ингредиенты для "<?php echo $model->menu_name; ?>"</h4>
 <table class="table table-hover">
     <tr>
         <th>Название</th>
@@ -31,6 +31,7 @@ $this->breadcrumbs = array(
     }
     ?>
 </table>
+<h4>Рецепт "<?php echo $model->menu_name; ?>"</h4>
 <?php
 echo $model->text;
 ?>
@@ -41,6 +42,7 @@ echo $model->text;
 <a rel="tooltip" title="автор"><i class="icon-user"></i></a> <small>Администратор</small>&nbsp;
 <a onclick="rating(<?php echo $model->dishes_id; ?>, 'up' ); return false;" class="rating-m" rel="tooltip" title="рейтинг. понравился рецепт (+1)"><i class="icon-arrow-up"></i></a> <small id="rating-count"><?php echo ($model->dishes_rating->plus - $model->dishes_rating->minus); ?></small> <a onclick="rating(<?php echo $model->dishes_id; ?>, 'down'); return false;" class="rating-m" rel="tooltip" title="рейтинг. не понравился рецепт (-1)" ><i class="icon-arrow-down"></i></a>&nbsp; 
 <a rel="tooltip" title="время приготовления"><i class="icon-time"></i></a> <small><?php echo $model->cooking_time; ?> мин.</small>&nbsp;
+<a href="/recipes/print/<?php echo $model->dishes_id; ?>" target="_blank" rel="tooltip" alt="распечатать рецепт '<?php echo $model->menu_name; ?>'" title="распечатать рецепт '<?php echo $model->menu_name; ?>'"><i class="icon-print"></i></a>&nbsp;
 <br/>
 
 <h4>Комментарии</h4>

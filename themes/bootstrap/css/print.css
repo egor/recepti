@@ -1,0 +1,12 @@
+/* 
+    Document   : print
+    Created on : 13.11.2013, 12:01:28
+    Author     : Администратор
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body {line-height:1.5;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;color:#000;background:none;font-size:10pt;}
