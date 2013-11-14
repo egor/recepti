@@ -21,17 +21,16 @@ class DishesController extends Controller {
      */
     public function actionIndex($category = 0) {
         $condition = $this->_categoryFilter($category);
-        $dishesCount = Dishes::model()->count();
-        $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Рецепты ('.$dishesCount.')';
         $criteria = new CDbCriteria();
         $criteria->order = 't.category_id, t.menu_name';
         $criteria->condition = $condition;
-        $count = Dishes::model()->count($criteria);
+        $count = Dishes::model()->count($criteria);        
         $paginator = new CPagination($count);
         $paginator->pageSize = $this->altAdminDishesPageSize;
         $paginator->applyLimit($criteria);
         $model = Dishes::model()->with('category', 'dishes_rating', 'dishes_visits')->findAll($criteria);
         $modelCategory = Category::model()->findAll();
+        $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Рецепты ('.$count.')';
         $this->render('index', array('model' => $model, 'modelCategory'=>$modelCategory, 'paginator' => $paginator));
     }
 
