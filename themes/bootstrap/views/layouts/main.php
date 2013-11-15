@@ -142,5 +142,12 @@
         </script>
         <noscript><div><img src="//mc.yandex.ru/watch/22957543" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
+        <script>
+            $(function()
+            {
+                $('.popover-right').popover({trigger: 'hover', placement: 'right', html: true});
+                $('.popover-left').popover({trigger: 'hover', placement: 'left', html: true});
+            });
+        </script>
     </body>
 </html>

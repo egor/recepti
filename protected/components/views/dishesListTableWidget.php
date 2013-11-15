@@ -10,16 +10,19 @@ foreach ($modelList as $value) {
     } else {
         $img = '<img src="/images/nf.jpg">';
     }
-    //var_dump($value->complexity); die;
     $url = '/recipes/'.$value->category->url.'/'.$value->url;
     if (isset($value->dishes_rating->plus) || isset($value->dishes_rating->minus)) {
         $rating = $value->dishes_rating->plus - $value->dishes_rating->minus;
     } else {
         $rating = 0;    
     }
-    //$rating = (empty($rating)?0:$rating);
     $visits = (empty($value->dishes_visits->count)?0:$value->dishes_visits->count);
-    echo '              <li class="span4">
+    echo '<li class="span4 '.($i%3 == 0 ? 'popover-left': 'popover-right').'" 
+        data-content="';
+    $this->widget('CompositionListWidget', array('dishesId' => $value->dishes_id));
+    echo '" 
+        rel="popover" 
+        data-original-title="<b>Ингредиенты</b>">
                 <div class="thumbnail">
                   <a href="'.$url.'">'.$img.'</a>
                   <div class="caption">

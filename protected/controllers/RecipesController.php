@@ -3,20 +3,15 @@
 class RecipesController extends Controller {
 
     public function actionIndex() {
-        $this->pageHeader = 'Рецепты';
-        $modelCategory = Category::model()->findAll();
-
-        $condition = '`visibility`="1"';
-        $criteria = new CDbCriteria();
-        $criteria->condition = $condition;
-        $criteria->order = 'position DESC';
+        $modelCategory = Category::model()->findAll(array('condition' => 'visibility="1"', 'order' => 'position DESC'));
+        foreach ($modelCategory as $value) {
+            $bestDishes[$value->category_id] = Dishes::model()->with('category')->findAll(array('condition' => 't.visibility="1" AND t.category_id="'.$value->category_id.'"', 'order' => 't.date, t.dishes_id', 'limit'=>3));
+        }
         //Yii::app()->clientScript->registerMetaTag($modelCategory->meta_keywords, 'keywords');
         //Yii::app()->clientScript->registerMetaTag($modelCategory->meta_description, 'description');
-        //$this->pageTitle = $modelCategory->meta_title;
-        //$this->pageHeader = $modelCategory->header;
         $this->pageTitle = 'Категории рецептов';
         $this->pageHeader = 'Категории рецептов';
-        $this->render('index', array('modelCategory' => $modelCategory));
+        $this->render('index', array('modelCategory' => $modelCategory, 'bestDishes' => $bestDishes));
     }
 
     /**
