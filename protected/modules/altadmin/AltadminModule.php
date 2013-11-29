@@ -13,6 +13,7 @@ class AltadminModule extends CWebModule {
             'altadmin.models.*',
             'altadmin.components.*',
         ));
+        $this->modules=array('parser');
     }
 
     public function beforeControllerAction($controller, $action) {

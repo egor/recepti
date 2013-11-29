@@ -19,16 +19,20 @@ class DishesController extends Controller {
      * @param int $category - id категории, рецепты которой нужно вывести
      * @return render index
      */
-    public function actionIndex($category = 0) {
-        $condition = $this->_categoryFilter($category);
+    public function actionIndex($category = 0, $parser = 0, $listPic = 0, $visibility = 0, $show = 0, $sort = 0) {
+        $condition = $this->_categoryFilter($category);        
+        $condition .= $this->_parserFilter($parser);
+        $condition .= $this->_listPicFilter($listPic);
+        $condition .= $this->_visibilityFilter($visibility);
+        $condition .= '1=1';
         $criteria = new CDbCriteria();
-        $criteria->order = 't.category_id, t.menu_name';
+        $criteria->order = $this->_orderList($sort);
         $criteria->condition = $condition;
         $count = Dishes::model()->count($criteria);        
         $paginator = new CPagination($count);
-        $paginator->pageSize = $this->altAdminDishesPageSize;
+        $paginator->pageSize = $this->_showFilter($show);
         $paginator->applyLimit($criteria);
-        $model = Dishes::model()->with('category', 'dishes_rating', 'dishes_visits')->findAll($criteria);
+        $model = Dishes::model()->with('category', 'dishes_rating', 'dishes_visits', 'user')->findAll($criteria);
         $modelCategory = Category::model()->findAll();
         $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Рецепты ('.$count.')';
         $this->render('index', array('model' => $model, 'modelCategory'=>$modelCategory, 'paginator' => $paginator));
@@ -81,7 +85,7 @@ class DishesController extends Controller {
      * @param integer $id - id рецепта
      */
     public function actionEdit($id) {
-        $model = Dishes::model()->findByPk($id);
+        $model = Dishes::model()->with('user', 'dishes_parser_info')->findByPk($id);
         $modelCategory = Category::model()->findByPk($model->category_id);
         $oldImg = $model->img;
         $this->pageTitle = $this->pageHeader = $this->breadcrumbsTitle = 'Редактирование рецепта (' . $model->menu_name . ')';
@@ -202,11 +206,112 @@ class DishesController extends Controller {
             $category = Yii::app()->session['dishesCategory'];
         }
         if ($category != 0 && $category != -1) {
-            $condition = 't.category_id ="' . $category . '"';
+            $condition = 't.category_id ="' . $category . '" AND ';
         }
         return $condition;
     }
     
+    private function _parserFilter($parser) {
+        $condition = '';      
+        if ($parser == -1) {            
+            unset(Yii::app()->session['dishesParser']);
+        } else if ($parser != 0) {
+            Yii::app()->session['dishesParser'] = $parser;
+        } else {
+            $parser = Yii::app()->session['dishesParser'];
+        }
+        if ($parser != 0 && $parser != -1) {
+            if ($parser == 1) {
+                $condition = 't.parser ="1" AND ';
+            } else {
+                $condition = 't.parser ="0" AND ';
+            }
+        }
+        return $condition;
+    }
+    
+    private function _listPicFilter($listPic) {
+        $condition = '';      
+        if ($listPic == -1) {            
+            unset(Yii::app()->session['dishesListPic']);
+        } else if ($listPic != 0) {
+            Yii::app()->session['dishesListPic'] = $listPic;
+        } else {
+            $listPic = Yii::app()->session['dishesListPic'];
+        }
+        if ($listPic != 0 && $listPic != -1) {
+            if ($listPic == 1) {
+                $condition = 't.img <>"" AND ';
+            } else {
+                $condition = 't.img ="" AND ';
+            }
+        }
+        return $condition;
+    }        
+    
+    private function _visibilityFilter($visibility) {
+        $condition = '';      
+        if ($visibility == -1) {            
+            unset(Yii::app()->session['dishesVisibility']);
+        } else if ($visibility != 0) {
+            Yii::app()->session['dishesVisibility'] = $visibility;
+        } else {
+            $visibility = Yii::app()->session['dishesVisibility'];
+        }
+        if ($visibility != 0 && $visibility != -1) {
+            if ($visibility == 1) {
+                $condition = 't.visibility = "1" AND ';
+            } else {
+                $condition = 't.visibility = "0" AND ';
+            }
+        }
+        return $condition;
+    }
+    
+    private function _orderList($sort) {
+        if ($sort) {
+            Yii::app()->session['dishesSort'] = $sort;
+        } else {
+            $sort = (Yii::app()->session['dishesSort'] ? Yii::app()->session['dishesSort'] : '-1');
+        }
+        $order = '';      
+        if ($sort == -1) {
+            $order = 't.menu_name';            
+        } else if ($sort == 1) {
+            $order = 't.menu_name DESC';  
+        } else if ($sort == 2) {
+            $order = 't.date DESC';  
+        } else if ($sort == 3) {
+            $order = 't.date';  
+        } else if ($sort == 4) {
+            $order = '(dishes_rating.plus - dishes_rating.minus) DESC';  
+        } else if ($sort == 5) {
+            $order = '(dishes_rating.plus - dishes_rating.minus)';  
+        } else if ($sort == 6) {
+            $order = 'dishes_visits.count DESC';  
+        } else if ($sort == 7) {
+            $order = 'dishes_visits.count';  
+        } else if ($sort == 8) {
+            $order = '';  
+        } else if ($sort == 9) {
+            $order = '';  
+        }
+        return $order;
+    }
+    
+    private function _showFilter($show ) {         
+        if ($show == -1) {            
+            unset(Yii::app()->session['dishesShow']);
+        } else if ($show != 0) {
+            Yii::app()->session['dishesShow'] = $show;
+        } else {
+            $show = Yii::app()->session['dishesShow'];
+        }
+        if ($show != 0 && $show != -1) {
+            return $show;
+        }
+        return $this->altAdminDishesPageSize;
+    }   
     //Ингредиенты
     
     /**
