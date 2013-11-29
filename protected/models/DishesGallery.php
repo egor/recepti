@@ -116,4 +116,15 @@ class DishesGallery extends CActiveRecord
         $model = DishesGallery::model()->findAll(array('condition'=>'pid="'.$pid.'"', 'order'=>'position DESC'));
         return $model;
     }
+    
+    public function existImage($pid)
+    {
+        $model = DishesGallery::model()->find(array('condition'=>'pid="'.$pid.'"'));
+        if ($model) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }

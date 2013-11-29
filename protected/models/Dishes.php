@@ -55,12 +55,12 @@ class Dishes extends CActiveRecord {
             array('category_id, url, meta_title, menu_name, header, date', 'required'),
             array('category_id, url, meta_title, meta_keywords, meta_description, menu_name, header, short_text, text, visibility, in_menu, date, user_id, cooking_time, complexity_id, servings, img, img_alt, img_title, tags, category_add', 'safe'),
             //array('category_id, url, meta_title, meta_keywords, meta_description, menu_name, header, short_text, text, visibility, in_menu, date, user_id, cooking_time, complexity_id, servings, img, img_alt, img_title, tags, category_add', 'required'),
-            array('category_id, visibility, in_menu, date, user_id, cooking_time, complexity_id', 'numerical', 'integerOnly' => true),
+            array('category_id, visibility, in_menu, date, user_id, cooking_time, complexity_id, parser', 'numerical', 'integerOnly' => true),
             array('servings', 'numerical'),
             array('url, meta_title, meta_keywords, menu_name, header, img, img_alt, img_title, category_add', 'length', 'max' => 255),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('dishes_id, category_id, url, meta_title, meta_keywords, meta_description, menu_name, header, short_text, text, visibility, in_menu, date, user_id, cooking_time, complexity_id, servings, img, img_alt, img_title, tags, category_add', 'safe', 'on' => 'search'),
+            array('dishes_id, category_id, url, meta_title, meta_keywords, meta_description, menu_name, header, short_text, text, visibility, in_menu, date, user_id, cooking_time, complexity_id, servings, img, img_alt, img_title, tags, category_add, parser', 'safe', 'on' => 'search'),
         );
     }
 
@@ -75,6 +75,8 @@ class Dishes extends CActiveRecord {
             'complexity' => array(self::BELONGS_TO, 'Complexity', 'complexity_id'),
             'dishes_rating' => array(self::HAS_ONE, 'DishesRating', 'dishes_id'),
             'dishes_visits' => array(self::HAS_ONE, 'DishesVisits', 'dishes_id'),
+            'dishes_parser_info' => array(self::HAS_ONE, 'DishesParserInfo', 'dishes_id'),
+            'user' => array(self::BELONGS_TO, 'User', 'user_id'),
         );
     }
 
@@ -105,6 +107,7 @@ class Dishes extends CActiveRecord {
             'img_title' => 'Img Title',
             'tags' => 'Теги',
             'category_add' => 'Category Add',
+            'parser' => 'Спарсено',
         );
     }
 
@@ -140,6 +143,9 @@ class Dishes extends CActiveRecord {
         $criteria->compare('img_title', $this->img_title, true);
         $criteria->compare('tags', $this->tags, true);
         $criteria->compare('category_add', $this->category_add, true);
+        $criteria->compare('parser', $this->parser, true);
+        
+        
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

@@ -122,4 +122,15 @@ if ($edit == 1) { ?>
 <div class="images-list well form-vertical">
     <h4>Для загрузки картинок сохраните страницу</h4>
 </div>
-<?php } ?>
+<?php } 
+if ($model->dishes_parser_info) {
+    ?>
+<div class="images-list well form-vertical">
+    <h4>Информация о парсинге</h4>
+    <?php
+    echo '<p>Адрес рецепта: '.$model->dishes_parser_info->url.'</p>';
+    ?>
+</div>
+    <?php
+}
+?>
