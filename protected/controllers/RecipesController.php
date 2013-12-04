@@ -20,7 +20,7 @@ class RecipesController extends Controller {
      * @param type $id
      */
     public function actionDishesDetail($id) {
-        $model = Dishes::model()->with('complexity', 'dishes_rating')->findByPk($id);
+        $model = Dishes::model()->with('complexity', 'dishes_rating', 'user')->findByPk($id);
         if ($model->visibility == 1) {
             $modelCategory = Category::model()->findByPk($model->category_id);
             $modelComposition = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');

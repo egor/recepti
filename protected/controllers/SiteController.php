@@ -29,7 +29,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $limit = 9;
-        $modelList = Dishes::model()->with('complexity', 'category', 'dishes_rating', 'dishes_visits')->findAll(array('order' =>'t.date DESC', 'limit'=>$limit));        
+        $modelList = Dishes::model()->with('complexity', 'category', 'dishes_rating', 'dishes_visits')->findAll(array('condition'=>'t.visibility=1', 'order' =>'t.date DESC', 'limit'=>$limit));        
         $this->render('index', array('modelList' => $modelList));
     }
 

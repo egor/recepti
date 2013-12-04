@@ -22,6 +22,11 @@ echo $form->textFieldRow($model, 'site', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'url', array('class' => 'span12'));
 ?>
 <small>Пример: http://namnamra.ru/recipes/category/4-course</small><br /><br />
+<?php
+echo $form->textFieldRow($model, 'categoryId', array('class' => 'span12'));
+?>
+<small>Пример: Вторые блюда</small><br /><br />
+
 <div class="form-actions" style="text-align: right;">
     <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'type' => 'primary', 'label' => 'Парсить')); ?>&nbsp;   
 <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'submit', 'label' => 'Отмена')); ?>

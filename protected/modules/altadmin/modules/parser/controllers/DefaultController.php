@@ -82,6 +82,7 @@ class DefaultController extends Controller {
             if ($model->site == 'namnamra.ru') {
                 //Строка со списком
                 $this->siteUrl = $model->url;
+                $this->categoryName = $model->categoryId;
                 $this->namnamraRu();
                 Yii::app()->user->setFlash('success', '<strong>Успех!</strong> Спарсили.');
                 exit;
@@ -120,7 +121,7 @@ class DefaultController extends Controller {
         //теги времени приготовления
         $this->detailTimeElementAttribute = 'span.duration';
         $this->detailImgElementAttribute = 'img.photo';
-        $this->categoryName = 'Вторые блюда';
+        
 
         $i = 0;
         $this->findLinkToDetailPage();
@@ -147,7 +148,7 @@ class DefaultController extends Controller {
             $newDishes->url = Transliteration::ruToLat($header->innertext);
             $time = $html->find($this->detailTimeElementAttribute, 0);
             $newDishes->cooking_time = (int) (strip_tags($time));
-
+            $text = '';
             foreach ($html->find($this->detailInstructuionElementAttribute) as $element) {
                 $text .= '<p>' . $element->innertext . '</p>';
             }
