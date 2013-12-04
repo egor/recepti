@@ -49,7 +49,7 @@ echo $model->text;
 <a rel="tooltip" title="количество комментариев"><i class="icon-comment"></i></a> <small>0</small>&nbsp;
 <a rel="tooltip" title="сложность"><i class="icon-leaf"></i></a> <small><?php echo $model->complexity->name; ?></small>&nbsp;
 <a rel="tooltip" title="просмотров"><i class="icon-eye-open"></i></a> <small><?php echo $visits; ?></small>&nbsp;
-<a rel="tooltip" title="автор"><i class="icon-user"></i></a> <small>Администратор</small>&nbsp;
+<a rel="tooltip" title="автор"><i class="icon-user"></i></a> <small><?php echo $model->user->name; ?></small>&nbsp;
 <a onclick="rating(<?php echo $model->dishes_id; ?>, 'up');
         return false;" class="rating-m" rel="tooltip" title="рейтинг. понравился рецепт (+1)"><i class="icon-arrow-up"></i></a> <small id="rating-count"><?php echo ($model->dishes_rating->plus - $model->dishes_rating->minus); ?></small> <a onclick="rating(<?php echo $model->dishes_id; ?>, 'down');
         return false;" class="rating-m" rel="tooltip" title="рейтинг. не понравился рецепт (-1)" ><i class="icon-arrow-down"></i></a>&nbsp; 

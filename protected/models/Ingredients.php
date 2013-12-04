@@ -39,11 +39,11 @@ class Ingredients extends CActiveRecord
         return array(
             array('name', 'required'),
             array('name', 'unique'),
-            array('position', 'numerical', 'integerOnly' => true),
+            array('position, parser, verification', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('ingredients_id, name, position', 'safe', 'on' => 'search'),
+            array('ingredients_id, name, position, parser', 'safe', 'on' => 'search'),
         );
     }
 
@@ -69,6 +69,8 @@ class Ingredients extends CActiveRecord
             'ingredients_id' => 'Ingredients',
             'name' => 'Название',
             'position' => 'Position',
+            'parser'=>'parser',
+            'verification'=>'verification',
         );
     }
 
@@ -86,6 +88,10 @@ class Ingredients extends CActiveRecord
         $criteria->compare('ingredients_id', $this->ingredients_id);
         $criteria->compare('name', $this->name, true);
         $criteria->compare('position', $this->position);
+        $criteria->compare('parser', $this->parser);
+        $criteria->compare('verification', $this->verification);
+        
+        
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,

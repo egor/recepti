@@ -22,7 +22,7 @@ return array(
         // uncomment the following to enable the Gii tool
 
         'gii' => array(
-            'generatorPaths'=>array(
+            'generatorPaths' => array(
                 'bootstrap.gii',
             ),
             'class' => 'system.gii.GiiModule',
@@ -31,11 +31,9 @@ return array(
             'ipFilters' => array('127.0.0.1', '::1'),
         ),
         'altadmin',
+        'altadmin.parser',
     ),
     // application components
-    
-
-        
     'components' => array(
         'user' => array(
             // enable cookie-based authentication
@@ -44,10 +42,12 @@ return array(
         'bootstrap' => array(
             'class' => 'bootstrap.components.Bootstrap',
         ),
-
+        'file' => array(
+            'class' => 'application.extensions.file.CFile',
+        ),
         // uncomment the following to enable URLs in path-format
-        'errorHandler'=>array(
-            'errorAction'=>'site/error',
+        'errorHandler' => array(
+            'errorAction' => 'site/error',
         ),
         'urlManager' => array(
             'urlFormat' => 'path',
@@ -62,12 +62,10 @@ return array(
                 'altadmin/logout' => 'altadmin/default/logout',
                 'altadmin/restore' => 'altadmin/default/restore',
                 'altadmin/confirmation/<key:\w+>' => 'altadmin/default/confirmation',
-                'altadmin/confirmation' => 'altadmin/default/confirmation',                
+                'altadmin/confirmation' => 'altadmin/default/confirmation',
                 '<modules:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<modules>/<controller>/<action>',
-                
                 //'recipes/dishesList/<id:\d+>' => 'recipes/dishesList',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                
                 //'recipes/<category:\w+-\w+>' => 'recipes/dishesList',
                 //'recipes/<category:\w+-\w+-\w+>' => 'recipes/dishesList',
                 //'recipes/<category:\w+-\w+-\w+>/' => 'recipes/dishesList',
@@ -76,12 +74,8 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '/selection-recipes' => 'selectionRecipes/index',
                 '/selection-recipes/list' => 'selectionRecipes/list',
-                
-
             ),
         ),
-        
-         
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',

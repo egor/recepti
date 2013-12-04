@@ -1,0 +1,2 @@
+ALTER TABLE  `dishes` ADD  `parser` TINYINT( 1 ) NOT NULL AFTER  `category_add`;
+ALTER TABLE  `ingredients` ADD  `parser` TINYINT( 1 ) NOT NULL AFTER  `position`

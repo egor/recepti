@@ -5,7 +5,7 @@ class RecipesController extends Controller {
     public function actionIndex() {
         $modelCategory = Category::model()->findAll(array('condition' => 'visibility="1"', 'order' => 'position DESC'));
         foreach ($modelCategory as $value) {
-            $bestDishes[$value->category_id] = Dishes::model()->with('category')->findAll(array('condition' => 't.visibility="1" AND t.category_id="'.$value->category_id.'"', 'order' => 't.date, t.dishes_id', 'limit'=>3));
+            $bestDishes[$value->category_id] = Dishes::model()->with('category')->findAll(array('condition' => 't.visibility="1" AND t.category_id="' . $value->category_id . '"', 'order' => 't.date, t.dishes_id', 'limit' => 3));
         }
         //Yii::app()->clientScript->registerMetaTag($modelCategory->meta_keywords, 'keywords');
         //Yii::app()->clientScript->registerMetaTag($modelCategory->meta_description, 'description');
@@ -20,15 +20,19 @@ class RecipesController extends Controller {
      * @param type $id
      */
     public function actionDishesDetail($id) {
-        $model = Dishes::model()->with('complexity', 'dishes_rating')->findByPk($id);
-        $modelCategory = Category::model()->findByPk($model->category_id);
-        $modelComposition = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
-        Yii::app()->clientScript->registerMetaTag($model->meta_keywords, 'keywords');
-        Yii::app()->clientScript->registerMetaTag($model->meta_description, 'description');
-        $this->pageTitle = $model->meta_title;
-        $this->pageHeader = $model->header;
-        $this->_dishesVisitsAdd($id);
-        $this->render('dishesDetail', array('model' => $model, 'modelCategory' => $modelCategory, 'modelComposition' => $modelComposition, 'visits' => $this->getCountDishesVisits($id)));
+        $model = Dishes::model()->with('complexity', 'dishes_rating', 'user')->findByPk($id);
+        if ($model->visibility == 1) {
+            $modelCategory = Category::model()->findByPk($model->category_id);
+            $modelComposition = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
+            Yii::app()->clientScript->registerMetaTag($model->meta_keywords, 'keywords');
+            Yii::app()->clientScript->registerMetaTag($model->meta_description, 'description');
+            $this->pageTitle = $model->meta_title;
+            $this->pageHeader = $model->header;
+            $this->_dishesVisitsAdd($id);
+            $this->render('dishesDetail', array('model' => $model, 'modelCategory' => $modelCategory, 'modelComposition' => $modelComposition, 'visits' => $this->getCountDishesVisits($id)));
+        } else {
+            throw new CHttpException(404);
+        }
     }
 
     /**
@@ -42,7 +46,7 @@ class RecipesController extends Controller {
         //var_dump($_GET); die;
         $modelCategory = Category::model()->findByPk($id);
         $limit = 9;
-        $condition = '`t`.`category_id`="' . $id . '"';
+        $condition = '`t`.`category_id`="' . $id . '" AND t.visibility=1';
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
         $criteria->order = 't.date DESC';
@@ -170,10 +174,11 @@ class RecipesController extends Controller {
         $this->pageTitle = $model->meta_title;
         $this->pageHeader = $model->header;
         if ($model) {
-            $this->layout='/layouts/printVersion';
+            $this->layout = '/layouts/printVersion';
             $this->render('print', array('model' => $model, 'modelCategory' => $modelCategory, 'modelComposition' => $modelComposition, 'visits' => $this->getCountDishesVisits($id)));
         } else {
             throw new CHttpException(404);
         }
     }
+
 }

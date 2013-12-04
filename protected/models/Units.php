@@ -41,10 +41,10 @@ class Units extends CActiveRecord
                         array('name, position', 'safe'),
 
 			array('position', 'numerical', 'integerOnly'=>true),
-			array('name', 'length', 'max'=>255),
+			array('name, declension, match', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('units_id, name, position', 'safe', 'on'=>'search'),
+			array('units_id, name, position, declension, match', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -69,6 +69,8 @@ class Units extends CActiveRecord
 			'units_id' => 'Units',
 			'name' => 'Название',
 			'position' => 'Position',
+            'declension' => 'Склонения',
+            'match' => 'Совпадения'
 		);
 	}
 
@@ -86,6 +88,9 @@ class Units extends CActiveRecord
 		$criteria->compare('units_id',$this->units_id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('position',$this->position);
+        $criteria->compare('declension',$this->declension);
+        $criteria->compare('match',$this->match);
+        
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
