@@ -24,8 +24,13 @@ echo $form->dropDownListRow($model, 'category_id', CHtml::listData(Category::mod
 echo $form->textFieldRow($model, 'url', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'menu_name', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'header', array('class' => 'span12'));
-echo $form->checkBoxRow($model, 'visibility', array('checked' => 'checked'));
-echo $form->checkBoxRow($model, 'in_menu', array('checked' => 'checked'));
+if (isset($edit)) {
+    echo $form->checkBoxRow($model, 'visibility');
+    echo $form->checkBoxRow($model, 'in_menu');
+} else {
+    echo $form->checkBoxRow($model, 'visibility', array('checked' => 'checked'));
+    echo $form->checkBoxRow($model, 'in_menu', array('checked' => 'checked'));    
+}
 if (isset($edit)) {
     echo $form->textFieldRow($model, 'date', array('class' => 'span12', 'id' => 'dp'));
 } else {
