@@ -11,7 +11,7 @@ $this->breadcrumbs = array(
 <div class="span12" style="margin-left: 0px;">
 <div  class="span6" style="margin-left: 0px;">
 <?php
-echo DishesGallery::mainGalleryImage($model->dishes_id);
+echo DishesGallery::mainGalleryImage($model->dishes_id, array('name'=>$model->menu_name));
 $gallery = DishesGallery::listGalleryImages($model->dishes_id);
 ?>
 </div>
