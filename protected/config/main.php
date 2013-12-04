@@ -72,6 +72,7 @@ return array(
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 //'<controller:\w+>/<action:\w+>/<key:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\S+>' => '<controller>/<action>',
                 '/selection-recipes' => 'selectionRecipes/index',
                 '/selection-recipes/list' => 'selectionRecipes/list',
             ),
