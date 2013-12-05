@@ -10,6 +10,7 @@
  */
 class SiteLeftMenuWidget extends CWidget
 {
+    public $currentCategoryId = 0;
     /**
      * Вывод меню категорий с лева
      * 
@@ -20,7 +21,7 @@ class SiteLeftMenuWidget extends CWidget
         $model = Category::model()->findAll('`in_menu`="1" AND `visibility`="1"');
         $menuList[] = array('label' => 'Рецепты');
         foreach ($model as $value) {
-            $menuList[] = array('label' => $value->menu_name, 'icon' => 'arrow-right', 'url' => '/recipes/'.$value->url, 'active' => '');
+            $menuList[] = array('label' => $value->menu_name, 'icon' => 'arrow-right', 'url' => '/recipes/'.$value->url, 'active' => ($this->currentCategoryId == $value->category_id ? 'true' : ''));
         }
         $this->render('siteLeftMenuWidget', array('menuList' => $menuList));
     }

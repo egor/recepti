@@ -63,7 +63,7 @@
                 <div class="span3"> 
 
                     <div style="padding: 8px 0;" class="well">
-                        <?php $this->widget('SiteLeftMenuWidget'); ?>
+                        <?php $this->widget('SiteLeftMenuWidget', array('currentCategoryId' => $this->currentCategoryId)); ?>
                     </div>          
                     <form id="search-form" action="/search" method="GET">
                         <div class="input-append" class="span12" style="overflow: hidden;">

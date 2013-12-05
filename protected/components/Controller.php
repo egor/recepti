@@ -61,5 +61,7 @@ class Controller extends CController
      * 
      * @var string
      */
-    public $breadcrumbsTitle = '';        
+    public $breadcrumbsTitle = '';
+    
+    public $currentCategoryId = 0;
 }

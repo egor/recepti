@@ -23,6 +23,7 @@ class RecipesController extends Controller {
         $model = Dishes::model()->with('complexity', 'dishes_rating', 'user')->findByPk($id);
         if ($model->visibility == 1) {
             $modelCategory = Category::model()->findByPk($model->category_id);
+            $this->currentCategoryId = $model->category_id;
             $modelComposition = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
             Yii::app()->clientScript->registerMetaTag($model->meta_keywords, 'keywords');
             Yii::app()->clientScript->registerMetaTag($model->meta_description, 'description');
@@ -45,6 +46,7 @@ class RecipesController extends Controller {
         unset($_GET['id']);
         //var_dump($_GET); die;
         $modelCategory = Category::model()->findByPk($id);
+        $this->currentCategoryId = $id;
         $limit = 9;
         $condition = '`t`.`category_id`="' . $id . '" AND t.visibility=1';
         $criteria = new CDbCriteria();
