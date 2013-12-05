@@ -118,7 +118,7 @@ class DishesGallery extends CActiveRecord
             }
             return '<a href="/images/dishes/real/'.$model->name.'" data-lightbox="roadtrip" ><img class="img-polaroid" src="/images/dishes/big/'.$model->name.'" ' . $meta . ' /></a>';
         } else {
-            return '<img src="/images/nf.jpg" />';
+            return '<img src="/images/b-nf.jpg" class="img-polaroid" />';
         }
     }
     
