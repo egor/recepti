@@ -63,6 +63,7 @@ return array(
                 'altadmin/restore' => 'altadmin/default/restore',
                 'altadmin/confirmation/<key:\w+>' => 'altadmin/default/confirmation',
                 'altadmin/confirmation' => 'altadmin/default/confirmation',
+                'sitemap.xml' => 'siteMapXML/index',
                 '<modules:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<modules>/<controller>/<action>',
                 //'recipes/dishesList/<id:\d+>' => 'recipes/dishesList',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
