@@ -50,11 +50,26 @@
         <div class="container" id="page">
 
             <?php if (isset($this->breadcrumbs)): ?>
+            
                 <?php
-                $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-                    'homeLink' => CHtml::link('Главная', '/'),
-                    'links' => $this->breadcrumbs,
+                $this->widget('zii.widgets.CBreadcrumbs', array(
+                    'homeLink' => '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/" itemprop="url"><span itemprop="title">Главная</span></a></li>',
+                    'links'=>$this->breadcrumbs,
+                    'tagName'=>'ul',
+                    'htmlOptions' => array('class'=>'breadcrumb'),
+                    'activeLinkTemplate' => '<li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{url}" itemprop="url"><span itemprop="title">{label}</span></a></li>',
+                    'inactiveLinkTemplate' => '<li class="active"><span itemprop="title">{label}</span></li>',
+                    'separator' => '<li><span class="divider">/</span></li>',
                 ));
+                /*$this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+                    'homeLink' => CHtml::link('Главная', '/'),
+                    
+                    'links' => $this->breadcrumbs,
+                    'htmlOptions' => array('itemscope'=>'', 'itemtype'=>'http://data-vocabulary.org/Breadcrumb'),
+                    'activeLinkTemplate' => '<li><a href="{url}">|{label}</a></li>',
+                    'inactiveLinkTemplate' => '<li><span>{label}</span></li>',
+                    //'separator' => '',
+                ));*/
                 ?><!-- breadcrumbs -->
             <?php endif ?>
 

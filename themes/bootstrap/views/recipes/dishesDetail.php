@@ -7,7 +7,8 @@ $this->breadcrumbs = array(
     $model->menu_name,
 );
 ?>
-<h1><?php echo $this->pageHeader; ?></h1>
+<div itemscope itemtype="http://schema.org/Recipe">
+<h1 itemprop="name"><?php echo $this->pageHeader; ?></h1>
 <div class="span12" style="margin-left: 0px;">
 <div  class="span6" style="margin-left: 0px;">
 <?php
@@ -41,20 +42,33 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
     }
     ?>
 </table>
+    <?php
+    foreach ($modelComposition as $value) {
+        echo '<div style="display:none" itemprop="ingredients">'.
+        $value->ingredients->name . ' ' .
+        ($value->count != 0 ? $value->count : '') . ' ' .
+        ($value->units->units_id != '1' ? $value->units->name : '') . ' ' .
+        '</div>';
+    }
+    ?>
 <h2 class="dishes">Рецепт "<?php echo $model->menu_name; ?>"</h2>
+<div itemprop="recipeInstructions">
 <?php
 echo $model->text;
 ?>
+</div>
 <a rel="tooltip" title="теги"><i class="icon-tag"></i></a> <?php echo $model->tags; ?><br />
 <a rel="tooltip" title="количество комментариев"><i class="icon-comment"></i></a> <small>0</small>&nbsp;
 <a rel="tooltip" title="сложность"><i class="icon-leaf"></i></a> <small><?php echo $model->complexity->name; ?></small>&nbsp;
+<a rel="tooltip" title="количество порций"><i class="icon-info-sign"></i></a> <small itemprop="recipeYield"><?php echo $model->servings; ?></small>&nbsp;
 <a rel="tooltip" title="просмотров"><i class="icon-eye-open"></i></a> <small><?php echo $visits; ?></small>&nbsp;
 <a rel="tooltip" title="автор"><i class="icon-user"></i></a> <small><?php echo $model->user->name; ?></small>&nbsp;
 <a onclick="rating(<?php echo $model->dishes_id; ?>, 'up');
         return false;" class="rating-m" rel="tooltip" title="рейтинг. понравился рецепт (+1)"><i class="icon-arrow-up"></i></a> <small id="rating-count"><?php echo ($model->dishes_rating->plus - $model->dishes_rating->minus); ?></small> <a onclick="rating(<?php echo $model->dishes_id; ?>, 'down');
         return false;" class="rating-m" rel="tooltip" title="рейтинг. не понравился рецепт (-1)" ><i class="icon-arrow-down"></i></a>&nbsp; 
-<a rel="tooltip" title="время приготовления"><i class="icon-time"></i></a> <small><?php echo $model->cooking_time; ?> мин.</small>&nbsp;
+<a rel="tooltip" title="время приготовления"><i class="icon-time"></i></a> <small itemprop="totalTime" content="PT<?php echo $model->cooking_time; ?>M"><?php echo $model->cooking_time; ?> мин.</small>&nbsp;
 <a href="/recipes/print/<?php echo $model->dishes_id; ?>" target="_blank" rel="tooltip" alt="распечатать рецепт '<?php echo $model->menu_name; ?>'" title="распечатать рецепт '<?php echo $model->menu_name; ?>'"><i class="icon-print"></i></a>&nbsp;
+</div>
 <br/>
 
 <h4>Комментарии</h4>

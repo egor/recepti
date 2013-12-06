@@ -116,7 +116,11 @@ class DishesGallery extends CActiveRecord
             } else {
                 $meta .= ' title="Фото, '.$data['name'].'" ';
             }
-            return '<a href="/images/dishes/real/'.$model->name.'" data-lightbox="roadtrip" ><img class="img-polaroid" src="/images/dishes/big/'.$model->name.'" ' . $meta . ' /></a>';
+            return '<a href="/images/dishes/real/'.$model->name.'" data-lightbox="roadtrip" ><img class="img-polaroid" src="/images/dishes/big/'.$model->name.'" ' . $meta . ' /></a>
+<meta itemprop="resultPhoto" content="http://recepti.dp.ua/images/dishes/big/'.$model->name.'"/>
+<meta itemprop="photo" content="http://recepti.dp.ua/images/dishes/big/'.$model->name.'"/>
+<meta itemprop="image" content="http://recepti.dp.ua/images/dishes/big/'.$model->name.'"/>
+';
         } else {
             return '<img src="/images/b-nf.jpg" class="img-polaroid" />';
         }
