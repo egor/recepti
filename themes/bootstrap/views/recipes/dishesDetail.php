@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 <div itemscope itemtype="http://schema.org/Recipe">
 <h1 itemprop="name"><?php echo $this->pageHeader; ?></h1>
 <div class="span12" style="margin-left: 0px;">
-<div  class="span6" style="margin-left: 0px;">
+<div  class="span6" style="margin-left: 0px; padding-right: 15px;">
 <?php
 echo DishesGallery::mainGalleryImage($model->dishes_id, array('name'=>$model->menu_name));
 $gallery = DishesGallery::listGalleryImages($model->dishes_id);
@@ -19,6 +19,10 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
     <div class="span6" style="margin-left: 0px;">
         <?php echo $model->short_text; ?>
     </div>
+    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+<div class="yashare-auto-init" data-yashareL10n="ru"
+ data-yashareQuickServices="gplus,yaru,vkontakte,facebook,twitter,odnoklassniki,moimir" data-yashareTheme="counter" style="float:right;"
+></div> 
 </div>
 
 <h2 class="dishes">Ингредиенты для "<?php echo $model->menu_name; ?>"</h2>
@@ -57,7 +61,13 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
 echo $model->text;
 ?>
 </div>
+<?php
+if ($model->tags) {
+?>
 <a rel="tooltip" title="теги"><i class="icon-tag"></i></a> <?php echo $model->tags; ?><br />
+<?php
+}
+?>
 <a rel="tooltip" title="количество комментариев"><i class="icon-comment"></i></a> <small>0</small>&nbsp;
 <a rel="tooltip" title="сложность"><i class="icon-leaf"></i></a> <small><?php echo $model->complexity->name; ?></small>&nbsp;
 <a rel="tooltip" title="количество порций"><i class="icon-info-sign"></i></a> <small itemprop="recipeYield"><?php echo $model->servings; ?></small>&nbsp;

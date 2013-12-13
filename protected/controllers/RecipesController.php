@@ -47,7 +47,7 @@ class RecipesController extends Controller {
         //var_dump($_GET); die;
         $modelCategory = Category::model()->findByPk($id);
         $this->currentCategoryId = $id;
-        $limit = 9;
+        $limit = 21;
         $condition = '`t`.`category_id`="' . $id . '" AND t.visibility=1';
         $criteria = new CDbCriteria();
         $criteria->condition = $condition;
