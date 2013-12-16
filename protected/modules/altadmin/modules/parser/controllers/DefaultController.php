@@ -74,7 +74,7 @@ class DefaultController extends Controller {
      */
     public $detailImgElementAttribute = '';
 
-    public function actionIndex() {
+    public function actionIndex() {        
         $model = new ParserForm;
         if (isset($_POST['ParserForm'])) {
             $model->attributes = $_POST['ParserForm'];

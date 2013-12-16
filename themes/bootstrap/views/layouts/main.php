@@ -87,6 +87,7 @@
                         </div>
                     </form>
                     <!--Sidebar content-->
+                    <?php $this->widget('QuoteWidget'); ?>                        
                 </div>
                 <div class="span9">
                     <?php echo $content; ?>
