@@ -13,6 +13,7 @@ class DishesListWidget extends CWidget
     public $modelList = array();
     public $paginator = array();
     public $viewWitget = 'dishesListTableWidget';
+    //public $viewWitget = 'dishesListWidget';
     /**
      * Вывод меню категорий с лева
      * 
@@ -20,8 +21,7 @@ class DishesListWidget extends CWidget
      */
     
     public function init()
-    {                
+    {
         $this->render($this->viewWitget, array('modelList' => $this->modelList, 'paginator'=>$this->paginator));
     }
 }
-?>
