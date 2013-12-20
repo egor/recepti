@@ -6,6 +6,7 @@ $this->breadcrumbs = array(
     $modelCategory->menu_name => '/recipes/' . $modelCategory->url,
     $model->menu_name,
 );
+$ingredientsArray = array();
 ?>
 <div itemscope itemtype="http://schema.org/Recipe">
 <h1 itemprop="name"><?php echo $this->pageHeader; ?></h1>
@@ -36,6 +37,7 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
     </tr>
     <?php
     foreach ($modelComposition as $value) {
+        $ingredientsArray[] = $value->ingredients->ingredients_id;
         echo '<tr>
         <td>' . $value->ingredients->name . '</td>        
         <td>' . ($value->count != 0 ? $value->count : '') . '</td>
@@ -80,7 +82,11 @@ if ($model->tags) {
 <a href="/recipes/print/<?php echo $model->dishes_id; ?>" target="_blank" rel="tooltip" alt="распечатать рецепт '<?php echo $model->menu_name; ?>'" title="распечатать рецепт '<?php echo $model->menu_name; ?>'"><i class="icon-print"></i></a>&nbsp;
 </div>
 <br/>
-
+<?php
+if (Yii::app()->params['site']['similarRecipes']) {
+    $this->widget('SimilarRecipesWidget', array('categoryId' => $modelCategory->category_id, 'ingredients' => $ingredientsArray, 'dishesId' => $model->dishes_id));
+}
+?>
 <h4>Комментарии</h4>
 
 

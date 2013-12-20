@@ -63,6 +63,7 @@ class Composition extends CActiveRecord
 		return array(
                     'ingredients'=>array(self::BELONGS_TO, 'Ingredients', 'ingredients_id'),
                     'units'=>array(self::BELONGS_TO, 'Units', 'units_id'),
+                    'dishes'=>array(self::BELONGS_TO, 'Dishes', 'dishes_id'),
                     //'ingredients'=>array(self::HAS_MANY, 'Ingredients', 'ingredients_id'),                    
                     //'units'=>array(self::HAS_MANY, 'Units', 'units_id'),
 		);

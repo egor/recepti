@@ -104,6 +104,9 @@ return array(
         // this is used in contact page
         'adminEmail' => 'egor.developer@gmail.com',
         'extraTitle' => ' | recepti.dp.ua',
-        'loger' => '1'
+        'loger' => '1',
+        'site' => array(
+            'similarRecipes'=>true,
+        ),
     ),
 );
