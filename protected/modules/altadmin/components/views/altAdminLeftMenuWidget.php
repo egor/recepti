@@ -30,6 +30,11 @@ function activeMenu($url) {
             array('label' => 'Еденицы измерения'),
             array('label' => 'Список', 'icon' => 'th-list', 'url' => '/altadmin/units', 'active' => activeMenu('altadmin/units/index')),
             array('label' => 'Добавить', 'icon' => 'plus', 'url' => '/altadmin/units/add', 'active' => activeMenu('altadmin/units/add')),
+            
+            array('label' => 'Страница ингридиентов'),
+            array('label' => 'Список', 'icon' => 'th-list', 'url' => '/altadmin/ingredientsPage', 'active' => activeMenu('altadmin/ingredientsPage/index')),
+            array('label' => 'Добавить', 'icon' => 'plus', 'url' => '/altadmin/ingredientsPage/add', 'active' => activeMenu('altadmin/ingredientsPage/add')),
+            
             '---',
             array('label' => 'Новости'),
             array('label' => 'Список', 'icon' => 'th-list', 'url' => '/altadmin/news', 'active' => activeMenu('altadmin/news/index')),
