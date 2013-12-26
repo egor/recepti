@@ -11,13 +11,14 @@ $ingredientsArray = array();
 <div itemscope itemtype="http://schema.org/Recipe">
 <h1 itemprop="name"><?php echo $this->pageHeader; ?></h1>
 <div class="span12" style="margin-left: 0px;">
-<div  class="span6" style="margin-left: 0px; padding-right: 15px;">
+
+    <div class="span12" style="margin-left: 0px;">
+        <div  class="span6" style="margin-left: 0px; padding-right: 15px; float: left;">
 <?php
 echo DishesGallery::mainGalleryImage($model->dishes_id, array('name'=>$model->menu_name));
 $gallery = DishesGallery::listGalleryImages($model->dishes_id);
 ?>
 </div>
-    <div class="span6" style="margin-left: 0px;">
         <?php echo $model->short_text; ?>
     </div>
     <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
