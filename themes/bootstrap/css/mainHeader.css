@@ -1,0 +1,68 @@
+/* 
+    Document   : mainHeader
+    Created on : 26.12.2013, 12:36:19
+    Author     : Администратор
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.hero-unit {
+        background-color: #FFFFFF;
+        background-image: url("/images/main/mtest1.jpg");
+        background-position: 50% top;
+        background-repeat: no-repeat;
+        color: #FFFFFF;
+        height: 540px;
+        overflow: hidden;
+        text-align: center;
+    }
+    .hero-unit {
+        background-color: #EEEEEE;
+        background-position: center top;
+        margin-bottom: 0px;
+        padding: 60px 0px 0px 0px;
+    }
+
+    .row:before, .row:after {
+        content: "";
+        display: table;
+    }
+    .row:after {
+        clear: both;
+    }
+    .row:before, .row:after {
+        content: "";
+        display: table;
+    }
+    .get-started-now {
+        margin-top: -70px;
+        position: relative;
+
+    }
+    .row {
+        margin-left: -20px;
+    }
+    .button-text-panel {
+        padding: 25px 30px;
+        text-align: center;
+    }
+    .white-panel {
+        background-color: #FFFFFF;
+        border: 1px solid #DADADA;
+        border-radius: 6px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+        color: #333333;
+        margin-bottom: 40px;
+        padding: 0;
+    }
+    .offset1 {
+        margin-left: 105px;
+    }
+    .span10 {
+        width: 830px;
+
+    }
+    [class*="span"] {
+        float: left;
+        margin-left: 20px;
+    }
