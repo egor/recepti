@@ -1,0 +1,57 @@
+/* 
+    Document   : buttonDown
+    Created on : 26.12.2013, 10:05:42
+    Author     : Администратор
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#top-link{
+	cursor:pointer;
+	display:none;
+	position:fixed;
+	left:0px;
+	top:0px;
+	padding:0;
+	z-index:1;
+	padding-top:35px;
+}
+#top-link:hover{
+	background:#ddd;
+}
+
+#top-link a {
+	display: block;
+	width: 50px;
+	text-align: center;
+	background: #333;
+	color: white;
+	padding: 5px 0;
+	margin:5px;
+	text-decoration:none !important;
+}
+
+#top-link:hover a{
+	background:#000;
+}
+
+#topicon{
+	width:0;
+	height:0;
+	display:inline-block;
+	border-bottom:7px solid #fff;
+	border-left:7px solid transparent;
+	border-right:7px solid transparent;
+	margin-right:5px;
+}
+
+#backicon{
+	width:0;
+	height:0;
+	display:inline-block;
+	border-top:7px solid #fff;
+	border-left:7px solid transparent;
+	border-right:7px solid transparent;
+	margin-right:5px;
+}
+
