@@ -4,7 +4,7 @@
 
 $this->pageTitle=Yii::app()->name;
 ?>
-
+<!--
 <?php $this->beginWidget('bootstrap.widgets.TbHeroUnit',array(
     'heading'=>'Лучшие рецепты с фото',
 )); ?>
@@ -13,6 +13,8 @@ $this->pageTitle=Yii::app()->name;
 <?php $this->endWidget(); ?>
     
 <h1><?php echo $this->pageHeader; ?></h1>
+-->
 <h2>Последние рецепы</h2>
+
 <?php $this->widget('DishesListWidget', array('modelList' =>$modelList)); ?>
 <?php $this->widget('NewsMainListWidget'); ?>

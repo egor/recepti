@@ -11,7 +11,7 @@
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/jquery-1.10.2.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/lightbox-2.6.min.js"></script>
         <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/lightbox/lightbox.css" media="screen"/>
-
+        <!--<link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/buttonDown.css" media="screen"/>-->
         <title><?php echo CHtml::encode($this->pageTitle) . Yii::app()->params['extraTitle']; ?></title>
 
         <?php Yii::app()->bootstrap->register(); ?>
@@ -25,6 +25,8 @@
         </script>
     </head>
     <body>
+        <?php $this->widget('HeaderMainWidget'); ?>     
+            
         <?php
         $this->widget('bootstrap.widgets.TbNavbar', array(
             'items' => array(
@@ -165,5 +167,11 @@
                 $('.popover-left').popover({trigger: 'hover', placement: 'left', html: true});
             });
         </script>
+        
+        <!--<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/buttonDown.js"></script>
+        <div id="top-link">
+            <a href="#top" id="top-link-a"><span id="topicon"></span><span id="text">наверх</span></a>
+        </div>-->
+
     </body>
 </html>
