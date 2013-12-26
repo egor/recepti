@@ -22,7 +22,7 @@ class NewsMainListWidget extends CWidget
         $newsList = News::model()->findAll(
                 array(
                     'condition' => '`visibility` = "1" AND `in_main` = "1"',
-                    'order' => 'date DESC',
+                    'order' => 'date DESC, news_id DESC',
                     'limit' => '3'
                 )
         );
