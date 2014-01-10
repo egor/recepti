@@ -56,3 +56,15 @@ blockquote > p:first-child {
     /*font-size: 20px;*/
     margin-top: 10px;
 }
+ul.mSearchUl li.sort-letter {
+    text-transform: uppercase;
+    width: 100%;
+    font-size: 16px;
+    
+}
+
+/*mSearch*/
+.mSearchBtn{
+    text-align: right;
+    padding: 10px 0;
+}

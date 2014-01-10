@@ -22,6 +22,10 @@ class DishesListWidget extends CWidget
     
     public function init()
     {
+        if (empty($this->viewWitget)) {
+            $this->viewWitget = 'dishesListTableWidget';
+        }
+        //echo $this->viewWitget.'-'; die;
         $this->render($this->viewWitget, array('modelList' => $this->modelList, 'paginator'=>$this->paginator));
     }
 }
