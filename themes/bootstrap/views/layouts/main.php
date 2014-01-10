@@ -33,11 +33,11 @@
                 array(
                     'class' => 'bootstrap.widgets.TbMenu',
                     'items' => array(
-                        array('label' => 'Главная', 'url' => '/'),
+                        array('label' => 'Главная', 'url' => '/', 'active'=> (Yii::app()->controller->id == 'site' && Yii::app()->controller->action->id == 'index' ? true : false)),
                         //array('label' => 'О нас', 'url' => '/about'),
                         //array('label' => 'Рецепты', 'url' => array('/site/contact')),
-                        array('label' => 'Рецепты', 'url' => array('/recipes')),
-                        array('label' => 'Новости', 'url' => array('/news')),
+                        array('label' => 'Рецепты', 'url' => array('/recipes'), 'active'=> (Yii::app()->controller->id == 'recipes' ? true : false)),
+                        array('label' => 'Новости', 'url' => array('/news'), 'active'=> (Yii::app()->controller->id == 'news' ? true : false)),
                     //array('label' => 'Подбор рецепта', 'url' => array('/selection-recipes')),
                     //array('label' => 'Поделиться рецептом', 'url' => array('/share-recipe')),
                     //array('label' => 'Контакты', 'url' => array('/news')),
