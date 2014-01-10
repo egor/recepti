@@ -28,6 +28,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->pageTitle = 'Лучшие рецепты с фото';
         $limit = 9;
         $modelList = Dishes::model()->with('complexity', 'category', 'dishes_rating', 'dishes_visits')->findAll(array('condition'=>'t.visibility=1', 'order' =>'t.date DESC', 'limit'=>$limit));        
         $this->render('index', array('modelList' => $modelList));

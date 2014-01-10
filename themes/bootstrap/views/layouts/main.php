@@ -6,7 +6,7 @@
         <meta name="language" content="ru" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/site.css" />        
-
+        <link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/favicon.ico" type="image/x-icon" />
 <!--<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/modernizr.custom.js"></script>-->
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/jquery-1.10.2.min.js"></script>
         <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/lightbox/lightbox-2.6.min.js"></script>
