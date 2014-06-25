@@ -1,0 +1,12 @@
+ALTER TABLE  `ingredients` ADD  `url` VARCHAR( 255 ) NOT NULL AFTER  `verification` ,
+ADD  `visibility` TINYINT( 1 ) NOT NULL AFTER  `url` ,
+ADD  `header` VARCHAR( 255 ) NOT NULL AFTER  `visibility` ,
+ADD  `short_text` TEXT NOT NULL AFTER  `header` ,
+ADD  `text` TEXT NOT NULL AFTER  `short_text` ,
+ADD  `img` VARCHAR( 255 ) NOT NULL AFTER  `text` ,
+ADD  `img_alt` VARCHAR( 255 ) NOT NULL AFTER  `img` ,
+ADD  `img_title` VARCHAR( 255 ) NOT NULL AFTER  `img_alt` ,
+ADD  `meta_title` VARCHAR( 255 ) NOT NULL AFTER  `img_title` ,
+ADD  `meta_keywords` VARCHAR( 255 ) NOT NULL AFTER  `meta_title`
+#------------------------------------
+ALTER TABLE  `ingredients` ADD  `meta_description` TEXT NOT NULL AFTER  `meta_keywords`
