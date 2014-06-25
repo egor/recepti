@@ -36,7 +36,7 @@ $this->widget('GetFlashesWidget');
         <td><a href="/altadmin/ingredients/edit/' . $value->ingredients_id . '" title="редактировать" rel="tooltip">' . $value->name . '</a></td>        
         <td><nobr>
         <a href="/altadmin/ingredients/edit/' . $value->ingredients_id . '" title="редактировать" rel="tooltip"><i class="icon-pencil"></i></a>&nbsp;
-        <a href="#" onclick="ingredientsDelete(' . $value->ingredients_id . '); return false;" title="удалить" rel="tooltip"><i class="icon-remove"></i></a>
+        <a href="#" onclick="myModalDeleteTrRecord('.$value->ingredients_id.', \''.$value->name.'\');return false;" title="удалить" rel="tooltip"><i class="icon-remove"></i></a>
         </nobr></td>
         </tr>';
     }
@@ -60,3 +60,5 @@ $this->widget('GetFlashesWidget');
     }
     ?>
 </div>
+<?php
+$this->widget('application.modules.altadmin.widgets.DeleteConfirmationWindow', array('method' => 'deleteTrRecord', 'data'=>array('url'=>'/altadmin/ingredients/delete', 'body'=>'<p>Вы уверены что хотите удалить ингредиент <b>"<span id="recordName"></span>"</b>?</p>', 'td' => 2)));
