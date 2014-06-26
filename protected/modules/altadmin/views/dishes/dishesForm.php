@@ -22,6 +22,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 );
 echo $form->dropDownListRow($model, 'category_id', CHtml::listData(Category::model()->findAll(array('order' => 'position')), 'category_id', 'menu_name'), array('class' => 'span12'));
 echo $form->textFieldRow($model, 'url', array('class' => 'span12'));
+?>
+<small>Пустой url будет сформирован из транслита краткого заголовка</small><br /><br />
+<?php
 echo $form->textFieldRow($model, 'menu_name', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'header', array('class' => 'span12'));
 echo $form->checkBoxRow($model, 'visibility', array('checked' => 'checked'));
@@ -43,6 +46,13 @@ echo $form->dropDownListRow($model, 'complexity_id', CHtml::listData(Complexity:
 echo $form->textFieldRow($model, 'servings', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'tags', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'category_add', array('class' => 'span12'));
+?>
+<h4>Изображение <small>(размер изображения 300 x 200 px)</small></h4>
+<small><b>Размер</b>. Изображение будет автоматически сжато и обрезано под размер (ширина:300 px, высота: 200 px)</small><br />
+<small><b>Имя файла</b>. Имя файла будет сформировано по формуле: id_резепта-исходное_имя_файла.расширение</small><br />
+<small><b>Alt</b>. Пустой Alt будет формироваться по формуле: Фото, название_рецепта</small><br />
+<small><b>Title</b>. Пустой Title будет формироваться по формуле: Фото, название_рецепта</small><br /><br />
+<?php
 if (isset($edit)) {
     ?>
     <table class="i-img">
@@ -57,10 +67,10 @@ if (isset($edit)) {
             <td class="pre-img">
                 <?php
                 if (!empty($model->img)) {
-                    echo '<div id="main-img"><img src="/images/dishes/' . $model->img . '" width="200px" /><br /><a href="#" onclick="dishesDeleteMainPic(' . $model->dishes_id . '); return false;" rel="tooltip" title="удалить картинку" class="i-remove"><i class="icon-remove"></i></a></div>';
+                    echo '<div id="image-preview"><img src="/images/dishes/' . $model->img . '" width="200px" /><br /><a href="#" onclick="myModalDeleteImage(); return false;" rel="tooltip" title="удалить картинку" class="i-remove"><i class="icon-remove"></i></a></div>';
                 } else {
-                    echo '<div id="main-img"><div class="main-img">нет фото</div></div>';
-                }
+                    echo '<div id="image-preview"><div class="image-preview-empty">нет фото</div></div>';
+                }                
                 ?>
             </td>
         </tr>
@@ -118,7 +128,11 @@ if ($edit == 1) { ?>
 <div class="images-list well form-vertical">
 <?php $this->widget('UploadifyWidget', array('model' => 'DishesGallery', 'pid' => $model->dishes_id, 'folder' => 'dishes', 'modelId' => 'dishes_gallery_id')); ?>
 </div>
-<?php } else { ?>
+<?php 
+
+$this->widget('application.modules.altadmin.widgets.DeleteConfirmationWindow', array('method' => 'deleteImage', 'data'=>array('id'=>$model->dishes_id, 'url'=>'/altadmin/dishes/deleteImage', 'body'=>'<p>Вы уверены что хотите удалить изображение списка?</p>', 'pathToImage' => '/images/dishes/'.$model->img)));
+
+} else { ?>
 <div class="images-list well form-vertical">
     <h4>Для загрузки картинок сохраните страницу</h4>
 </div>
@@ -133,4 +147,3 @@ if ($model->dishes_parser_info) {
 </div>
     <?php
 }
-?>
