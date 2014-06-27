@@ -83,8 +83,15 @@ class ALTDishes extends Dishes {
      */
     protected function beforeDelete() {
         parent::beforeDelete();
+        //удалим изображение списка
         $this->deleteImage($this->dishes_id, 'img', '/images/dishes/');
+        //удалим изображения галереи
+        $galleryList = ALTDishesGallery::model()->findAll(array('condition'=>'pid="' . $this->dishes_id . '"'));
+        foreach ($galleryList as $value) {
+            ALTDishesGallery::model()->findByPk($value->dishes_gallery_id)->delete();
+        }
+        //удалим список ингредиентов
+        ALTComposition::model()->deleteAll('`dishes_id`="' . $this->dishes_id . '"');
         return true;
     }
-
 }

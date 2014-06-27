@@ -134,6 +134,7 @@ class DishesController extends Controller {
      * @param integer $id - id рецепта
      */
     public function actionDelete($id) {
+        /*
         $model = Dishes::model()->findByPk($id);
         if ($model->dishes_id > 0) {
             $transaction = $model->dbConnection->beginTransaction();
@@ -146,6 +147,14 @@ class DishesController extends Controller {
             } catch (Exception $e) {
                 $transaction->rollback();
             }
+        } else {
+            echo json_encode(array('error' => 1));
+        }
+         * 
+         */
+
+        if (ALTDishes::model()->findByPk($id)->delete()) {
+            echo json_encode(array('error' => 0));
         } else {
             echo json_encode(array('error' => 1));
         }

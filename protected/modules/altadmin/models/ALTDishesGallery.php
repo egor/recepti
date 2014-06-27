@@ -39,6 +39,5 @@ class ALTDishesGallery extends DishesGallery {
         parent::beforeDelete();
         $this->deleteImageGroup($this->dishes_gallery_id, 'name', array('/images/dishes/small/', '/images/dishes/big/', '/images/dishes/real/'));
         return true;
-    }
-
+    }    
 }
