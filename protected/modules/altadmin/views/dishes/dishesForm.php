@@ -118,7 +118,7 @@ $(document).ready(function() {
 if ($edit == 1) { ?>
 <script>
     pathToActionChangeOrder = '/altadmin/dishes/changeOrder';
-    pathToActionDeleteImage = '/altadmin/dishes/deleteImage';
+    pathToActionDeleteImage = '/altadmin/dishes/deleteImageGallery';
     pathToActionEditMetaImage = '/altadmin/dishes/editMetaImage';
 </script>
 <br />

@@ -303,7 +303,7 @@ class DishesController extends Controller {
      */
     public function actionCompositionAdd() {
         $id = (int) $_POST['id'];
-        $model = new Composition;
+        $model = new ALTComposition;
         if (isset($_POST['ingredients_id']) && isset($_POST['units_id'])) {
             $model->dishes_id = $id;
             $model->ingredients_id = $_POST['ingredients_id'];
@@ -350,7 +350,7 @@ class DishesController extends Controller {
      * @return renderPartial compositionShowList - список ингредиентов
      */
     public function actionCompositionShowList($id) {
-        $model = Composition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
+        $model = ALTComposition::model()->with('ingredients', 'units')->findAll('`dishes_id`="' . $id . '"');
         $this->renderPartial('compositionShowList', array('model' => $model));
     }
 
@@ -362,7 +362,7 @@ class DishesController extends Controller {
      * @param integer $id - id ингредиента
      */
     public function actionCompositionDelete($id) {
-        Composition::model()->deleteByPk($id);
+        ALTComposition::model()->deleteByPk($id);
         echo json_encode(array('error' => 0));
     }
 
@@ -377,6 +377,14 @@ class DishesController extends Controller {
       echo ImagesBasicOperations::deleteImage('DishesGallery', $_POST['id'], $imageFolder);
       }
      */
+
+    public function actionDeleteImageGallery($id) {
+        if (ALTDishesGallery::model()->findByPk($id)->delete($id)) {
+            echo json_encode(array('error' => 0));
+        } else {
+            echo json_encode(array('error' => 1));
+        }
+    }
 
     public function actionDeleteImage($id) {
         if (ALTDishes::model()->findByPk($id)->deleteImage($id, 'img', '/images/dishes/')) {

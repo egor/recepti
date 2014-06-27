@@ -14,8 +14,8 @@
             <table width="100%" class="adm-images-form" style="text-align:left; vertical-align: top;">
             <tr><td width="310px;">
             ';
-            if (file_exists(Yii::getPathOfAlias('webroot') . '/images/' . $folder . '/small/' . $value->name)) {
-                echo '<img class="pimages" src="/images/' . $folder . '/small/' . $value->name . '" >';
+            if (file_exists(Yii::getPathOfAlias('webroot') . '/images/' . $folder . '/big/' . $value->name)) {
+                echo '<img class="pimages" src="/images/' . $folder . '/big/' . $value->name . '" >';
             } else {
                 echo 'Нет фото';
             }
@@ -33,7 +33,7 @@
                     </td><td width="15px;" style="vertical-align:top;">
                 
                     
-                        <a href="#"  onclick="deleteImage(' . $value->$modelId . '); return false;" title="Удалить"><i class="icon-remove"></i></a>
+                        <a href="#"  onclick="myModalDeleteImageGallery(' . $value->$modelId . ', \'/images/' . $folder . '/small/' . $value->name . '\'); return false;" title="Удалить"><i class="icon-remove"></i></a>
 </td></tr></table>                            
 </li>';
         }
@@ -50,4 +50,56 @@
         echo '<p>Нет фото</p>';
     }
     ?>
+</div>
+
+<script>
+    globImgId = 0;
+    function myModalDeleteImageGallery(id, path) {
+        globImgId = id;
+        $('#prewImageDeleteGallery').html('<img src="'+path+'" style="with:120px;"/>');
+        $('#myModalDeleteImageGallery').modal('show');
+    }
+
+</script>
+<div id="myModalDeleteImageGallery" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header modal-norm-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-trash"></i>&nbsp;&nbsp;&nbsp;Удалить?</h3>
+    </div>
+    <div class="modal-body">
+        <div style="float: left;">Удалить изображение галереи?</div><div style="float: right;"><span id="prewImageDeleteGallery"></span></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Нет, это была случайность</button>
+        <button class="btn btn-primary" id="test" onclick="deleteImageGallery();
+        return false;" data-dismiss="modal" aria-hidden="true" >Да, удалить</button>
+    </div>
+</div>
+
+<!-- Сообщение о том что изображение успешно удалено -->
+<div id="myModalDeleteImageGallerySuccess" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header modal-success-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-ok"></i> Успех!</h3>
+    </div>
+    <div class="modal-body">
+        <p>Изображение успешно удалено!</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Продолжить</button>    
+    </div>
+</div>
+
+<!-- Сообщение об ошибке -->
+<div id="myModalDeleteImageGalleryError" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header modal-error-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel"><i class="icon-bolt icon-animated-hand-pointer red"></i> Ошибка!</h3>
+    </div>
+    <div class="modal-body" id="myModalDeleteImageGalleryErrorText">
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Закрыть</button>    
+    </div>
 </div>

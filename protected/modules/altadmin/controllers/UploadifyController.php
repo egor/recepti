@@ -38,7 +38,8 @@ class UploadifyController extends Controller {
                 $handle->file_auto_rename = false;
                 $handle->jpeg_quality = 100;
                 //$handle->file_name_body = $id;
-                $handle->file_new_name_body = $modelImg->dishes_gallery_id;
+                //$handle->file_new_name_body = $modelImg->dishes_gallery_id;
+                $handle->file_name_body_pre = $modelImg->dishes_gallery_id . '-';
                 $handle->process(Yii::getPathOfAlias('webroot') . $folder . '/real/');
                 if ($handle->processed) {
                     $img = $handle->file_dst_name;
@@ -55,7 +56,8 @@ class UploadifyController extends Controller {
                 $handle->image_resize = true;
                 $handle->image_ratio = true;
                 $handle->image_ratio_crop = true;
-                $handle->file_new_name_body = $modelImg->dishes_gallery_id;
+                //$handle->file_new_name_body = $modelImg->dishes_gallery_id;
+                $handle->file_name_body_pre = $modelImg->dishes_gallery_id . '-';
                 $handle->image_x = $arrSizeImg['big']['width'];
                 $handle->image_y = $arrSizeImg['big']['height'];
                 $handle->process(Yii::getPathOfAlias('webroot') . $folder . '/big/');
@@ -74,7 +76,8 @@ class UploadifyController extends Controller {
                 $handle->image_resize = true;
                 $handle->image_ratio = false;
                 $handle->image_ratio_crop = true;
-                $handle->file_new_name_body = $modelImg->dishes_gallery_id;
+                //$handle->file_new_name_body = $modelImg->dishes_gallery_id;
+                $handle->file_name_body_pre = $modelImg->dishes_gallery_id . '-';
                 $handle->image_x = $arrSizeImg['small']['width'];
                 $handle->image_y = $arrSizeImg['small']['height'];
                 $handle->process(Yii::getPathOfAlias('webroot') . $folder . '/small/');
@@ -85,7 +88,7 @@ class UploadifyController extends Controller {
                     Yii::app()->user->setFlash('error', '<strong>Ошибка!</strong> ' . $handle->error);
                 }
             }
-            $modelImg->name = $modelImg->dishes_gallery_id . '.' . $handle->file_src_name_ext;
+            $modelImg->name = $img;//$modelImg->dishes_gallery_id . '.' . $handle->file_src_name_ext;
             $modelImg->visibility = 1;
             $modelImg->save();
         }

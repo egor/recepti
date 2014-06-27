@@ -1,25 +1,30 @@
-function deleteImage(id) {
-    if (!confirm("Уверены, что хотите удалить куртинку?")) {
-        return true;
-    }
+function deleteImageGallery() {
+    //alert (globImgId); return true;
+    //if (!confirm("Уверены, что хотите удалить куртинку?")) {
+    //    return true;
+    //}
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: pathToActionDeleteImage,
-        data: "id=" + id,
+        data: "id=" + globImgId,
         success: function(data) {
             var obj = $.parseJSON(data);
             if (obj.error == 0) {
-                $("#note_" + id).remove();
+                $("#note_" + globImgId).remove();
                 if ($('#sortable').html() == '') {
                     $('#images-save-sort').hide();
                     $('#images-list-block').html('<p>Нет картинок</p>');
                 }
-            } else {
+                $('#myModalDeleteImageGallerySuccess').modal('show');
+            } else {                
                 if (obj.message != '') {
-                    alert(obj.message);
+                    $('#myModalDeleteImageGalleryErrorText').html(obj.message);
+                    //alert(obj.message);
                 } else {
-                    alert('упс..... ошибочка');
+                    $('#myModalDeleteImageGalleryErrorText').html('Ошибка');
+                    //alert('упс..... ошибочка');
                 }
+                $('#myModalDeleteImageGalleryError').modal('show');
             }
         }
     });
