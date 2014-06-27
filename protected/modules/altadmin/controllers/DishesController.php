@@ -87,6 +87,7 @@ class DishesController extends Controller {
             }
         }
         $model->date = date('d.m.Y', $model->date);
+        $model->tags = $model->printTagToEdit();
         $this->render('dishesForm', array('model' => $model, 'modelCategory' => $modelCategory, 'edit' => 1));
     }
 

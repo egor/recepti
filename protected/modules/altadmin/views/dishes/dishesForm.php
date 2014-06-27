@@ -45,6 +45,9 @@ echo $form->dropDownListRow($model, 'complexity_id', CHtml::listData(Complexity:
 
 echo $form->textFieldRow($model, 'servings', array('class' => 'span12'));
 echo $form->textFieldRow($model, 'tags', array('class' => 'span12'));
+?>
+<small>Теги перечислять через запятую</small><br /><br />
+<?php
 echo $form->textFieldRow($model, 'category_add', array('class' => 'span12'));
 ?>
 <h4>Изображение <small>(размер изображения 300 x 200 px)</small></h4>
