@@ -159,9 +159,13 @@ class ImagesBasicOperations {
 
             if ($width != 0) {
                 $handle->image_x = $width;
+            } else {
+                $handle->image_x = $handle->image_src_x;
             }
             if ($height != 0) {
                 $handle->image_y = $height;
+            } else {
+                $handle->image_y = $handle->image_src_y;
             }
 
             $handle->process(Yii::getPathOfAlias('webroot') . $folder);
