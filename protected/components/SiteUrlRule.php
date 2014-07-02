@@ -34,30 +34,38 @@ class SiteUrlRule extends CBaseUrlRule {
         if ($url[0] == 'altadmin') {
             return false;
         }
-        /*Рецепты*/
+        /* Рецепты */
         if ($url[0] == 'recipes' && isset($url[1]) && $url[1] != 'dishesRating') {
             if (isset($url[1])) {
                 $category = Category::model()->find('`url`="' . $url[1] . '"');
                 if ($category->category_id) {
-                    //список рецептов
+//список рецептов
                     if (!isset($url[2])) {
                         return 'recipes/dishesList/id/' . $category->category_id;
                     } else {
                         $dishes = Dishes::model()->find('`url`="' . $url[2] . '"');
-                        //подробная страница рецепта
+//подробная страница рецепта
                         if ($dishes->dishes_id && $dishes->category_id == $category->category_id) {
                             return 'recipes/dishesDetail/id/' . $dishes->dishes_id;
                         }
                     }
-                } 
+                }
             }
         }
 
-        /*Новости*/
+        /* Ингредиенты */
+        if ($url[0] == 'ingredients' && isset($url[1])) {
+            if (isset($url[1])) {
+                $ingredients = Ingredients::model()->find('`url`="' . $url[1] . '" AND `visibility`="1"');
+                return 'ingredients/detail/id/' . $ingredients->ingredients_id;
+            }
+        }
+
+        /* Новости */
         if ($url[0] == 'news') {
             if (isset($url[1]) && !isset($url[2])) {
-                $model = News::model()->find(array('condition'=>'url="'.$url[1].'"'));
-                //подробная страница новости
+                $model = News::model()->find(array('condition' => 'url="' . $url[1] . '"'));
+//подробная страница новости
                 if ($model) {
                     return '/news/detail/id/' . $model->news_id;
                 }
@@ -65,4 +73,5 @@ class SiteUrlRule extends CBaseUrlRule {
         }
         return false;  // не применяем данное правило
     }
+
 }

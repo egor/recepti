@@ -70,6 +70,8 @@ return array(
                 //'recipes/<category:\w+-\w+-\w+>' => 'recipes/dishesList',
                 //'recipes/<category:\w+-\w+-\w+>/' => 'recipes/dishesList',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                //'<controller:\w+>' => '<controller>/index',                                
+                'ingredients' => 'ingredients/index',
                 //'<controller:\w+>/<action:\w+>/<key:\w+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 '/selection-recipes' => 'selectionRecipes/index',
