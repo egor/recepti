@@ -17,7 +17,7 @@ class IngredientsController extends Controller {
     public function actionIndex() {
         $criteria = new CDbCriteria();
         $criteria->condition = 't.visibility="1"';
-        $criteria->order = 't.name DESC';
+        $criteria->order = 't.name';
         $count = Ingredients::model()->count($criteria);
         $paginator = new CPagination($count);
         $paginator->pageSize = $this->siteLimit;
