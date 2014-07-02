@@ -31,8 +31,23 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
     </tr>
     <?php
     foreach ($modelComposition as $value) {
+        $ingredient['print'] = $value->ingredients->name;
+        
+        //краткая информация о ингредиенте
+        if ($value->ingredients->visibility == 1) {
+            $ingredient['img'] = '';
+            $ingredient['dataContent'] = '';            
+            if (!empty($value->ingredients->img) && file_exists(Yii::getPathOfAlias('webroot').'/images/ingredients/small/' . $value->ingredients->img)) {
+                $ingredient['img'] = '<img src=\'/images/ingredients/small/'.$value->ingredients->img.'\'>';
+            }
+            if (!empty($ingredient['img']) || !empty($value->ingredients->short_text)) {
+                $ingredient['dataContent'] = 'data-content="' . $ingredient['img'] . '<br />' . $value->ingredients->short_text . '" rel="popover" data-original-title="Краткое описание"';
+            }
+            $ingredient['print'] = '<a href="/ingredients/' . $value->ingredients->url . '" ' . $ingredient['dataContent'] . ' class="popover-right">' . $value->ingredients->name . '</a>';
+        }
+        
         echo '<tr>
-        <td>' . $value->ingredients->name . '</td>        
+        <td>' . $ingredient['print'] . '</td>        
         <td>' . ($value->count != 0 ? $value->count : '') . '</td>
         <td>' . ($value->units->units_id != '1' ? $value->units->name : '') . '</td>            
         <td>' . ($value->required == 1 ? '<a rel="tooltip" title="да"><i class="icon-ok-sign"></i></a>' : '<a rel="tooltip" title="нет"><i class="icon-minus-sign"></i></a>') . '</td>        
