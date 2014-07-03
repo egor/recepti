@@ -11,14 +11,13 @@ $ingredientsArray = array();
 <div itemscope itemtype="http://schema.org/Recipe">
 <h1 itemprop="name"><?php echo $this->pageHeader; ?></h1>
 <div class="span12" style="margin-left: 0px;">
-
-    <div class="span12" style="margin-left: 0px;">
-        <div  class="span6" style="margin-left: 0px; padding-right: 15px; float: left;">
+<div  class="span6" style="margin-left: 0px;">
 <?php
-echo DishesGallery::mainGalleryImage($model->dishes_id, array('name'=>$model->menu_name));
+echo DishesGallery::mainGalleryImage($model->dishes_id, $model);
 $gallery = DishesGallery::listGalleryImages($model->dishes_id);
 ?>
 </div>
+    <div class="span6" style="margin-left: 0px;">
         <?php echo $model->short_text; ?>
     </div>
     <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
@@ -38,9 +37,23 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
     </tr>
     <?php
     foreach ($modelComposition as $value) {
-        $ingredientsArray[] = $value->ingredients->ingredients_id;
+        $ingredient['print'] = $value->ingredients->name;
+        
+        //краткая информация о ингредиенте
+        if ($value->ingredients->visibility == 1) {
+            $ingredient['img'] = '';
+            $ingredient['dataContent'] = '';            
+            if (!empty($value->ingredients->img) && file_exists(Yii::getPathOfAlias('webroot').'/images/ingredients/small/' . $value->ingredients->img)) {
+                $ingredient['img'] = '<img src=\'/images/ingredients/small/'.$value->ingredients->img.'\'>';
+            }
+            if (!empty($ingredient['img']) || !empty($value->ingredients->short_text)) {
+                $ingredient['dataContent'] = 'data-content="' . $ingredient['img'] . '<br />' . $value->ingredients->short_text . '" rel="popover" data-original-title="Краткое описание"';
+            }
+            $ingredient['print'] = '<a href="/ingredients/' . $value->ingredients->url . '" ' . $ingredient['dataContent'] . ' class="popover-right">' . $value->ingredients->name . '</a>';
+        }
+        
         echo '<tr>
-        <td>' . $value->ingredients->name . '</td>        
+        <td>' . $ingredient['print'] . '</td>        
         <td>' . ($value->count != 0 ? $value->count : '') . '</td>
         <td>' . ($value->units->units_id != '1' ? $value->units->name : '') . '</td>            
         <td>' . ($value->required == 1 ? '<a rel="tooltip" title="да"><i class="icon-ok-sign"></i></a>' : '<a rel="tooltip" title="нет"><i class="icon-minus-sign"></i></a>') . '</td>        
@@ -62,14 +75,8 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
 <div itemprop="recipeInstructions">
 <?php
 echo $model->text;
-?>
-</div>
-<?php
-if ($model->tags) {
-?>
-<a rel="tooltip" title="теги"><i class="icon-tag"></i></a> <?php echo $model->tags; ?><br />
-<?php
-}
+//вывод тегов рецепта
+$this->widget('application.widgets.tags.TagsListByDishesId', array('dishesId' => $model->dishes_id));
 ?>
 <a rel="tooltip" title="количество комментариев"><i class="icon-comment"></i></a> <small>0</small>&nbsp;
 <a rel="tooltip" title="сложность"><i class="icon-leaf"></i></a> <small><?php echo $model->complexity->name; ?></small>&nbsp;

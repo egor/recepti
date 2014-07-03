@@ -111,7 +111,7 @@ foreach ($model as $value) {
         <td>'.($value->parser ? '<a rel="tooltip" title="есть"><i class="icon-ok-sign"></i></a>' : '<a rel="tooltip" title="нет"><i class="icon-minus-sign"></i></a>').'</td>
         <td><nobr>
         <a href="/altadmin/dishes/edit/'.$value->dishes_id.'" title="редактировать" rel="tooltip"><i class="icon-pencil"></i></a>&nbsp;
-        <a href="#" onclick="dishesDelete('.$value->dishes_id.'); return false;" title="удалить" rel="tooltip"><i class="icon-remove"></i></a>
+        <a href="#" onclick="myModalDeleteTrRecord('.$value->dishes_id.', \''.$value->menu_name.'\'); return false;" title="удалить" rel="tooltip"><i class="icon-remove"></i></a>
         <a rel="tooltip" target="_blank" title="посмотреть на сайте" href="/recipes/'.$value->category->url.'/'.$value->url.'"><i class="icon-chevron-right"></i></a>
         </nobr></td>
         </tr>';
@@ -136,3 +136,5 @@ if ($paginator) {
 }
 ?>
 </div>
+<?php
+$this->widget('application.modules.altadmin.widgets.DeleteConfirmationWindow', array('method' => 'deleteTrRecord', 'data'=>array('url'=>'/altadmin/dishes/delete', 'body'=>'<p>Вы уверены что хотите удалить рецепт <b>"<span id="recordName"></span>"</b>?</p>', 'td' => 13)));
