@@ -59,8 +59,9 @@ $gallery = DishesGallery::listGalleryImages($model->dishes_id);
 <h2 class="dishes">Рецепт "<?php echo $model->menu_name; ?>"</h2>
 <?php
 echo $model->text;
+//вывод тегов рецепта
+$this->widget('application.widgets.tags.TagsListByDishesId', array('dishesId' => $model->dishes_id));
 ?>
-<a rel="tooltip" title="теги"><i class="icon-tag"></i></a> <?php echo $model->tags; ?><br />
 <a rel="tooltip" title="количество комментариев"><i class="icon-comment"></i></a> <small>0</small>&nbsp;
 <a rel="tooltip" title="сложность"><i class="icon-leaf"></i></a> <small><?php echo $model->complexity->name; ?></small>&nbsp;
 <a rel="tooltip" title="просмотров"><i class="icon-eye-open"></i></a> <small><?php echo $visits; ?></small>&nbsp;
